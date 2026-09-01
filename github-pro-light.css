@@ -1,0 +1,1062 @@
+/* ==========================================================================
+   github-pro · 浅色主题
+   基于官方 github.css 的 GitHub 风格底座，适度现代化（圆角 / 细阴影 / 舒适间距）。
+   所有颜色、字体、字号、间距、圆角、阴影、正文宽度、CodeMirror 高亮色
+   统一在 :root 用 --gp- 前缀的 CSS 变量定义，供 github-pro.dark.css 整体覆盖。
+   结构：github-pro.css 是完整独立主题；github-pro.dark.css 只覆盖变量值。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   【0】设计 token（浅色 · GitHub Light 色彩体系）
+   -------------------------------------------------------------------------- */
+:root {
+  /* 字体栈 */
+  --gp-font-sans:
+    -apple-system, "Segoe UI", "Microsoft YaHei", "PingFang SC",
+    "Hiragino Sans GB", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --gp-font-mono:
+    "JetBrains Mono", "Cascadia Code", Consolas, "Courier New", monospace;
+
+  /* 正文/版心 */
+  --gp-content-width: 85%; /* 与 base.user.css 的 85% 保持一致 */
+  --gp-font-size: 16px;
+  --gp-line-height: 1.7;
+
+  /* 品牌与链接 */
+  --gp-accent: #0969da;
+  --gp-accent-hover: #0550ae;
+  --gp-link: #0969da;
+
+  /* 背景与文本 */
+  --gp-bg: #ffffff;
+  --gp-text: #24292f;
+  --gp-text-muted: #57606a;
+  --gp-text-faint: #8c959f;
+  --gp-heading-text: #1f2328;
+
+  /* 边框 */
+  --gp-border: #d0d7de;
+  --gp-border-light: #eaeef2;
+
+  /* 标题下划线 */
+  --gp-heading-border: #d0d7de;
+  --gp-hr: #eaeef2;
+
+  /* 行内代码 / 代码块 */
+  --gp-inline-code-bg: rgba(175, 184, 193, 0.2);
+  --gp-inline-code-border: #eaeef2;
+  --gp-code-bg: #f6f8fa;
+  --gp-code-fence-bg: #f6f8fa;
+  --gp-code-fence-border: #d0d7de;
+  --gp-code-text: #24292e;
+
+  /* 标题编号 */
+  --gp-number: #6e7781;
+
+  /* 圆角 / 阴影 */
+  --gp-radius-s: 6px;
+  --gp-radius-m: 10px;
+  --gp-radius-l: 12px;
+  --gp-shadow:
+    0 1px 3px rgba(27, 31, 36, 0.06), 0 0 0 1px rgba(27, 31, 36, 0.02);
+
+  /* 引用块 */
+  --gp-quote-bg: #f6f8fa;
+  --gp-quote-border: #d0d7de;
+  --gp-quote-bg-2: #f0f3f6;
+  --gp-quote-border-2: rgba(84, 174, 255, 0.55);
+  --gp-quote-bg-3: #eaeef2;
+  --gp-quote-border-3: rgba(130, 80, 223, 0.5);
+
+  /* 表格 */
+  --gp-table-header-bg: #f6f8fa;
+  --gp-table-stripe: #fbfcfd;
+  --gp-table-hover: #f0f3f6;
+
+  /* 分割线/其他块 */
+  --gp-meta-bg: #f6f8fa;
+  --gp-meta-border: #d0d7de;
+
+  /* 侧边栏 */
+  --gp-sidebar-bg: #f6f8fa;
+  --gp-sidebar-text: #24292f;
+  --gp-sidebar-muted: #57606a;
+  --gp-sidebar-hover: #eaeef2;
+  --gp-sidebar-active: rgba(9, 105, 218, 0.1);
+  --gp-sidebar-indicator: #0969da;
+
+  /* 状态栏 */
+  --gp-status-bg: #f6f8fa;
+  --gp-status-text: #57606a;
+  --gp-status-border: #eaeef2;
+
+  /* 选区 / 搜索 / 拼写 */
+  --gp-selection-bg: rgba(9, 105, 218, 0.25);
+  --gp-search-hit-bg: rgba(255, 200, 0, 0.35);
+  --gp-search-hit-active: rgba(255, 160, 0, 0.5);
+
+  /* 滚动条 */
+  --gp-scrollbar-thumb: rgba(175, 184, 193, 0.5);
+  --gp-scrollbar-thumb-hover: rgba(140, 149, 159, 0.75);
+  --gp-scrollbar-size: 10px;
+
+  /* 光标 / 代码块行号分隔线 / 文件树导航线 */
+  --gp-caret: #0969da;
+  --gp-gutter-border: #eaeef2;
+  --gp-tree-guide: #d4dae0;
+
+  /* 映射到 Typora 自身界面的变量 */
+  --side-bar-bg-color: #fafafa;
+  --control-text-color: #777;
+  --item-hover-bg-color: #eaeef2;
+  --active-file-bg-color: rgba(9, 105, 218, 0.1);
+  --active-file-border-color: #0969da;
+
+  /* 编辑器本身的色彩模式（影响原生滚动条、表单控件外观） */
+  color-scheme: light;
+
+  /* ---------------------- CodeMirror 高亮 token（GitHub Light） ---------------------- */
+  --gp-cm-text: #24292e;
+  --gp-cm-comment: #6a737d;
+  --gp-cm-keyword: #d73a49;
+  --gp-cm-string: #032f62;
+  --gp-cm-number: #005cc5;
+  --gp-cm-function: #6f42c1;
+  --gp-cm-variable: #24292e;
+  --gp-cm-type: #d73a49;
+  --gp-cm-tag: #22863a;
+  --gp-cm-attribute: #6f42c1;
+  --gp-cm-builtin: #005cc5;
+  --gp-cm-operator: #d73a49;
+  --gp-cm-meta: #032f62;
+  --gp-cm-property: #005cc5;
+  --gp-cm-header: #005cc5;
+  --gp-cm-link: #032f62;
+  --gp-cm-hr: #24292e;
+  --gp-cm-error: #b31d28;
+  --gp-cm-text-faint: #8c959f;
+}
+
+/* --------------------------------------------------------------------------
+   【1】基础 / 字体 / 全局
+   -------------------------------------------------------------------------- */
+html {
+  font-size: var(--gp-font-size);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--gp-font-sans);
+  color: var(--gp-text);
+  background-color: var(--gp-bg);
+  line-height: var(--gp-line-height);
+  font-size: 1rem;
+}
+
+#write {
+  background-color: var(--gp-bg);
+  color: var(--gp-text);
+  max-width: var(--gp-content-width); /* 由 base.user.css 的 85% 文案一致 */
+}
+/* 写作区外层容器 <content> 同背景，确保深浅主题下整页背景一致 */
+content {
+  background-color: var(--gp-bg);
+}
+
+/* 光标颜色（编辑时可辨） */
+#write,
+#typora-source .CodeMirror {
+  caret-color: var(--gp-caret);
+}
+
+#write > ul:first-child,
+#write > ol:first-child {
+  margin-top: 30px;
+}
+
+/* --------------------------------------------------------------------------
+   【2】链接
+   -------------------------------------------------------------------------- */
+a {
+  color: var(--gp-link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--gp-accent-hover);
+  text-decoration: underline;
+}
+a:visited {
+  color: var(--gp-link);
+}
+
+/* --------------------------------------------------------------------------
+   【3】标题排版（含用于 .anchor 的光标定位）
+   -------------------------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: text;
+  color: var(--gp-heading-text);
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+  text-decoration: none;
+}
+h1 {
+  font-size: 2em;
+  line-height: 1.2;
+  border-bottom: 1px solid var(--gp-heading-border);
+  padding-bottom: 0.3em;
+}
+h2 {
+  font-size: 1.5em;
+  line-height: 1.3;
+  border-bottom: 1px solid var(--gp-heading-border);
+  padding-bottom: 0.3em;
+}
+h3 {
+  font-size: 1.25em;
+}
+h4 {
+  font-size: 1.1em;
+}
+h5 {
+  font-size: 1em;
+  color: var(--gp-text-muted);
+}
+h6 {
+  font-size: 0.9em;
+  color: var(--gp-text-muted);
+}
+h1 code,
+h1 tt,
+h2 code,
+h2 tt,
+h3 code,
+h3 tt,
+h4 code,
+h4 tt,
+h5 code,
+h5 tt,
+h6 code,
+h6 tt,
+h1 .md-plain,
+h2 .md-plain,
+h3 .md-plain,
+h4 .md-plain {
+  font-size: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   【标题自动编号】h1–h6 用 CSS counter 自动编号。
+   删除此段可关闭自动编号。
+   注：TOC（.md-toc）不含编号属正常，归因于编号是 CSS 生成的伪元素；
+   作者希望保留 TOC 编号（如 1.1）时，另行在手册里说明。
+   -------------------------------------------------------------------------- */
+/* #write {
+    counter-reset: gp-h1;
+}
+#write h1 { counter-increment: gp-h1; counter-reset: gp-h2 gp-h3 gp-h4 gp-h5 gp-h6; }
+#write h2 { counter-increment: gp-h2; counter-reset: gp-h3 gp-h4 gp-h5 gp-h6; }
+#write h3 { counter-increment: gp-h3; counter-reset: gp-h4 gp-h5 gp-h6; }
+#write h4 { counter-increment: gp-h4; counter-reset: gp-h5 gp-h6; }
+#write h5 { counter-increment: gp-h5; counter-reset: gp-h6; }
+#write h6 { counter-increment: gp-h6; }
+#write h1::before {
+    content: counter(gp-h1) " ";
+    color: var(--gp-number);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h2::before {
+    content: counter(gp-h1) "." counter(gp-h2) " ";
+    color: var(--gp-number);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h3::before {
+    content: counter(gp-h1) "." counter(gp-h2) "." counter(gp-h3) " ";
+    color: var(--gp-number);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h4::before {
+    content: counter(gp-h1) "." counter(gp-h2) "." counter(gp-h3) "." counter(gp-h4) " ";
+    color: var(--gp-number);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h5::before {
+    content: counter(gp-h1) "." counter(gp-h2) "." counter(gp-h3) "." counter(gp-h4) "." counter(gp-h5) " ";
+    color: var(--gp-number);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h6::before {
+    content: counter(gp-h1) "." counter(gp-h2) "." counter(gp-h3) "." counter(gp-h4) "." counter(gp-h5) "." counter(gp-h6) " ";
+    color: var(--gp-number);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+} */
+
+/* --------------------------------------------------------------------------
+   【4】段落 / 列表 / 分割线 / 通用间距
+   -------------------------------------------------------------------------- */
+p,
+blockquote,
+ul,
+ol,
+dl,
+table {
+  margin: 0.8em 0;
+}
+li > ol,
+li > ul {
+  margin: 0 0;
+}
+ul,
+ol {
+  padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+  margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
+}
+li p.first {
+  display: inline-block;
+}
+hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: var(--gp-hr);
+  border-radius: 2px;
+  border: 0 none;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+/* --------------------------------------------------------------------------
+   【5】行内代码
+   注：base.user.css 会覆盖 #write code 的 background/font-size/padding，
+   此处先用变量声明保持一致风格；深色下的背景强制覆盖见 dark.css。
+   -------------------------------------------------------------------------- */
+code,
+tt {
+  font-family: var(--gp-font-mono);
+  font-size: 0.9em;
+  background-color: var(--gp-inline-code-bg);
+  border: 1px solid var(--gp-inline-code-border);
+  border-radius: var(--gp-radius-s);
+  padding: 0.1em 0.3em;
+  color: inherit;
+  word-break: break-word;
+}
+
+/* --------------------------------------------------------------------------
+   【6】代码块（圆角 / 顶栏 / 语言标签 / CodeMirror 高亮）
+   -------------------------------------------------------------------------- */
+.md-fences {
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--gp-code-fence-bg);
+  color: var(--gp-code-text);
+  border: 1px solid var(--gp-code-fence-border);
+  border-radius: var(--gp-radius-l);
+  box-shadow: var(--gp-shadow);
+  font-size: 0.9em;
+  line-height: 1.6;
+  padding: 30px 16px 16px 16px; /* 顶部留白用于放“mac 三色圆点” */
+  margin: 18px 0;
+}
+/* macOS 三色圆点（Win / mac 均显示；纯装饰，可删） */
+.md-fences::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow:
+    20px 0 0 #ffbd2e,
+    40px 0 0 #27c93f;
+}
+/* 语言标签：使用真实 DOM（.code-tooltip 内的 .ty-cm-lang-input）。
+   说明：Typora 会在代码块 hover/聚焦时显示该语言工具提示，故它不是“常显”，
+   而是“悬停/聚焦显”。此处只做轻量外观，绝不做 top/right/box-shadow 覆盖，
+   以免点击代码块时产生随代码长度拉伸的渲染异常。 */
+.md-fences .code-tooltip {
+  font-family: var(--gp-font-mono);
+  font-size: 0.72em;
+  color: var(--gp-text-muted);
+  background-color: var(--gp-bg);
+  border: 1px solid var(--gp-border);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+.md-fences .code-tooltip .ty-cm-lang-input {
+  color: var(--gp-text-muted);
+}
+/* 使 CodeMirror 透明以露出代码块背景 */
+.md-fences .CodeMirror {
+  background-color: transparent;
+}
+.md-fences .CodeMirror-lines {
+  padding-left: 4px;
+}
+.md-fences .CodeMirror-wrap .CodeMirror-code pre {
+  font-family: var(--gp-font-mono);
+}
+/* 行号分隔线（浅色更淡，观感不抢眼） */
+.md-fences .CodeMirror-gutters {
+  background-color: transparent;
+  border-right: 1px solid var(--gp-gutter-border);
+}
+
+/* 代码块内各 token 高亮（CodeMirror 类名体系 .cm-*）。
+   注：live 代码块的 CodeMirror 主题类是 cm-s-inner（非 cm-s-default），
+   为避免依赖具体 cm-s-* 名称，统一改用 .md-fences 作用域限定。 */
+.md-fences .CodeMirror {
+  color: var(--gp-cm-text);
+}
+.md-fences .cm-comment {
+  color: var(--gp-cm-comment);
+  font-style: italic;
+}
+.md-fences .cm-keyword {
+  color: var(--gp-cm-keyword);
+}
+.md-fences .cm-string {
+  color: var(--gp-cm-string);
+}
+.md-fences .cm-string-2 {
+  color: var(--gp-cm-string);
+}
+.md-fences .cm-number {
+  color: var(--gp-cm-number);
+}
+.md-fences .cm-atom {
+  color: var(--gp-cm-number);
+}
+.md-fences .cm-def {
+  color: var(--gp-cm-function);
+}
+.md-fences .cm-variable {
+  color: var(--gp-cm-variable);
+}
+.md-fences .cm-variable-2 {
+  color: var(--gp-cm-variable);
+}
+.md-fences .cm-variable-3 {
+  color: var(--gp-cm-variable);
+}
+.md-fences .cm-property {
+  color: var(--gp-cm-property);
+}
+.md-fences .cm-operator {
+  color: var(--gp-cm-operator);
+}
+.md-fences .cm-meta {
+  color: var(--gp-cm-meta);
+}
+.md-fences .cm-builtin {
+  color: var(--gp-cm-builtin);
+}
+.md-fences .cm-qualifier {
+  color: var(--gp-cm-builtin);
+}
+.md-fences .cm-type {
+  color: var(--gp-cm-type);
+}
+.md-fences .cm-tag {
+  color: var(--gp-cm-tag);
+}
+.md-fences .cm-bracket {
+  color: var(--gp-cm-text);
+}
+.md-fences .cm-attribute {
+  color: var(--gp-cm-attribute);
+}
+.md-fences .cm-header {
+  color: var(--gp-cm-header);
+}
+.md-fences .cm-link {
+  color: var(--gp-cm-link);
+}
+.md-fences .cm-hr {
+  color: var(--gp-cm-hr);
+}
+.md-fences .cm-punctuation {
+  color: var(--gp-cm-text);
+}
+.md-fences .cm-formatting {
+  color: var(--gp-cm-text-faint, #8c959f);
+}
+.md-fences .cm-error {
+  color: var(--gp-cm-error);
+}
+
+/* --------------------------------------------------------------------------
+   【7】表格（圆角用“四角单元格圆角”，保持 border-collapse: separate，
+   避免 overflow:hidden 影响拖拽列宽）
+   -------------------------------------------------------------------------- */
+#write table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius-m);
+  word-break: normal;
+}
+#write table th,
+#write table td {
+  border: 0;
+  border-top: 1px solid var(--gp-border);
+  border-left: 1px solid var(--gp-border);
+  margin: 0;
+  padding: 8px 16px;
+}
+#write table thead th {
+  border-top: 0;
+}
+#write table th:first-child,
+#write table td:first-child {
+  border-left: 0;
+}
+
+/* 四角圆角（让第 1 行、最后 1 行的首尾单元格圆角） */
+#write table th:first-child {
+  border-top-left-radius: var(--gp-radius-m);
+}
+#write table th:last-child {
+  border-top-right-radius: var(--gp-radius-m);
+}
+#write table tr:last-child td:first-child {
+  border-bottom-left-radius: var(--gp-radius-m);
+}
+#write table tr:last-child td:last-child {
+  border-bottom-right-radius: var(--gp-radius-m);
+}
+
+/* 表头 / 斑马纹 / 行 hover */
+#write table thead th {
+  background-color: var(--gp-table-header-bg);
+  font-weight: 600;
+}
+#write table tr:nth-child(even) td {
+  background-color: var(--gp-table-stripe);
+}
+#write table tr:hover td {
+  background-color: var(--gp-table-hover);
+}
+
+/* --------------------------------------------------------------------------
+   【8】引用块（卡片化 + 多级强调色）
+   -------------------------------------------------------------------------- */
+#write blockquote {
+  box-sizing: border-box;
+  background-color: var(--gp-quote-bg);
+  border-left: 4px solid var(--gp-quote-border);
+  border-radius: var(--gp-radius-s);
+  color: var(--gp-text-muted);
+  padding: 10px 16px;
+  margin: 16px 0;
+}
+#write blockquote blockquote {
+  background-color: var(--gp-quote-bg-2);
+  border-left-color: var(--gp-quote-border-2);
+  margin: 0.8em 0;
+}
+#write blockquote blockquote blockquote {
+  background-color: var(--gp-quote-bg-3);
+  border-left-color: var(--gp-quote-border-3);
+}
+
+/* --------------------------------------------------------------------------
+   【9】任务清单（恢复原生复选框与勾选交互；只对“被勾选的该任务项”置灰+删除线，
+   不波及子任务——父项勾选不代表子项完成）
+   -------------------------------------------------------------------------- */
+.md-task-list-item.task-list-done {
+  color: var(--gp-text-faint);
+}
+.md-task-list-item.task-list-done > p,
+.md-task-list-item.task-list-done > .md-plain {
+  color: var(--gp-text-faint);
+  text-decoration: line-through;
+}
+/* 子任务项：不继承父任务的置灰/删除线 */
+.md-task-list-item .md-task-list-item {
+  color: var(--gp-text);
+  text-decoration: none;
+}
+/* 若子任务自身也被勾选，则单独显示置灰+删除线 */
+.md-task-list-item .md-task-list-item.task-list-done {
+  color: var(--gp-text-faint);
+}
+.md-task-list-item .md-task-list-item.task-list-done > p,
+.md-task-list-item .md-task-list-item.task-list-done > .md-plain {
+  color: var(--gp-text-faint);
+  text-decoration: line-through;
+}
+
+/* --------------------------------------------------------------------------
+   【10】图片
+   说明：Typora 默认已将图片水平居中展示，故本主题不再对 .md-image 做居中或
+   额外布局处理，以免误把“插入图片的 Alt/src 文本”也居中。仅保留圆角微调。
+   -------------------------------------------------------------------------- */
+.md-image > img {
+  max-width: 100%;
+  vertical-align: middle;
+  border-radius: var(--gp-radius-s);
+}
+
+/* --------------------------------------------------------------------------
+   【11】YAML Front Matter（卡片化）
+   -------------------------------------------------------------------------- */
+#write pre.md-meta-block {
+  position: relative;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background-color: var(--gp-meta-bg);
+  border: 1px solid var(--gp-meta-border);
+  border-radius: var(--gp-radius-m);
+  box-shadow: var(--gp-shadow);
+  font-family: var(--gp-font-mono);
+  font-size: 0.85em;
+  line-height: 1.5;
+  color: var(--gp-text-muted);
+  padding: 32px 1.2rem 1rem 1.2rem; /* 顶部留白放三色圆点 */
+  margin-top: 0 !important;
+}
+/* YAML 卡片左上角 mac 三色圆点 */
+#write pre.md-meta-block::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow:
+    20px 0 0 #ffbd2e,
+    40px 0 0 #27c93f;
+}
+/* YAML 徽标（右上角） */
+#write pre.md-meta-block::after {
+  content: "YAML";
+  position: absolute;
+  top: 9px;
+  right: 12px;
+  font-family: var(--gp-font-sans);
+  font-size: 0.7em;
+  color: var(--gp-text-faint);
+  border: 1px solid var(--gp-border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  background-color: var(--gp-bg);
+}
+
+/* --------------------------------------------------------------------------
+   【12】文内 TOC 卡片化（不做滚动高亮）
+   -------------------------------------------------------------------------- */
+.md-toc {
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--gp-quote-bg);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius-m);
+  padding: 30px 16px 12px 16px; /* 顶部留白放三色圆点 */
+  margin: 20px 0;
+}
+/* TOC 卡片左上角 mac 三色圆点 */
+.md-toc::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow:
+    20px 0 0 #ffbd2e,
+    40px 0 0 #27c93f;
+}
+.md-toc-content {
+  font-size: 0.95em;
+  color: var(--gp-text-muted);
+}
+.md-toc-content ul {
+  border-left: 1px solid var(--gp-border-light); /* 层级参考线 */
+  padding-left: 16px;
+  margin-left: 4px;
+}
+.md-toc-item a {
+  color: var(--gp-link);
+  text-decoration: none;
+}
+.md-toc-item a:hover {
+  color: var(--gp-accent-hover);
+  text-decoration: underline;
+}
+/* 弹出的 TOC 工具条：与 TOC 框左对齐（修复“白条右移”） */
+.md-toc-tooltip {
+  left: 0 !important;
+  right: auto !important;
+}
+
+/* --------------------------------------------------------------------------
+   【13】侧边栏 IDE 化（只改样式，不动折叠/拖宽/点击/跳转）
+   -------------------------------------------------------------------------- */
+#typora-sidebar {
+  background-color: var(--gp-sidebar-bg);
+}
+
+/* 顶部“文件 / 大纲” tab 容器 */
+.sidebar-tabs {
+  background-color: var(--gp-sidebar-bg);
+  border-bottom: 1px solid var(--gp-border-light);
+}
+.sidebar-tab {
+  padding: 8px 14px;
+  color: var(--gp-sidebar-muted);
+  font-size: 13px;
+  border-radius: var(--gp-radius-s);
+}
+.sidebar-tab:hover {
+  color: var(--gp-sidebar-text);
+}
+/* 活动 tab：容器带 active-tab-files / active-tab-outline 时高亮对应 tab */
+#typora-sidebar.active-tab-files
+  .sidebar-tab[id="sidepanel-segmented-input-files"],
+#typora-sidebar.active-tab-outline
+  .sidebar-tab[id="sidepanel-segmented-input-outline"] {
+  color: var(--gp-link);
+  font-weight: 600;
+  background-color: var(--gp-sidebar-active);
+}
+
+/* 文件树：紧凑行高 + hover + 圆角高亮块 + 活动指示条 */
+.file-node-content {
+  padding: 2px 8px;
+  line-height: 1.5;
+  color: var(--gp-sidebar-text);
+  border-radius: var(--gp-radius-s);
+  font-size: 13.5px;
+}
+.file-node-content:hover {
+  background-color: var(--gp-sidebar-hover);
+}
+.file-node-content:hover .file-node-title {
+  color: var(--gp-heading-text);
+}
+.file-node-content .file-node-title {
+  font-weight: 400;
+}
+/* 文件夹加粗（带 .file-node-open-state 即 folder） */
+.file-node-content:has(.file-node-open-state) .file-node-title {
+  font-weight: 600;
+}
+.file-node-open-state,
+.file-node-icon {
+  color: var(--gp-sidebar-muted);
+}
+/* 子层级缩进 + 同层级导航线（IDE 风格细线） */
+.file-node-children {
+  margin-left: 8px;
+  padding-left: 10px;
+  border-left: 1px solid var(--gp-tree-guide);
+}
+/* 当前打开文件：圆角高亮块 + 左侧活动指示条 */
+.file-tree-node.active > .file-node-content {
+  background-color: var(--gp-sidebar-active);
+  color: var(--gp-link);
+  box-shadow: inset 3px 0 0 var(--gp-sidebar-indicator);
+}
+.file-tree-node.active > .file-node-content .file-node-title {
+  font-weight: 500;
+}
+
+/* 大纲面板（同步美化；类名未确认，按常用类处理） */
+.outline-content {
+  background-color: var(--gp-sidebar-bg);
+}
+.outline-item {
+  color: var(--gp-sidebar-muted);
+  border-radius: var(--gp-radius-s);
+  font-size: 13.5px;
+}
+.outline-item:hover {
+  background-color: var(--gp-sidebar-hover);
+  color: var(--gp-sidebar-text);
+}
+.outline-item.active {
+  background-color: var(--gp-sidebar-active);
+  color: var(--gp-link);
+}
+
+/* --------------------------------------------------------------------------
+   【14】滚动条（细窄半透明；hover 用“透明 border + background-clip”加宽）
+   -------------------------------------------------------------------------- */
+#write::-webkit-scrollbar,
+#typora-sidebar::-webkit-scrollbar,
+#typora-source::-webkit-scrollbar,
+#typora-source .CodeMirror-scroll::-webkit-scrollbar,
+.sidebar-content::-webkit-scrollbar,
+.file-tree::-webkit-scrollbar,
+.outline-content::-webkit-scrollbar {
+  width: var(--gp-scrollbar-size);
+  height: var(--gp-scrollbar-size);
+}
+#write::-webkit-scrollbar-track,
+#typora-sidebar::-webkit-scrollbar-track,
+#typora-source::-webkit-scrollbar-track,
+#typora-source .CodeMirror-scroll::-webkit-scrollbar-track,
+.sidebar-content::-webkit-scrollbar-track,
+.file-tree::-webkit-scrollbar-track,
+.outline-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+#write::-webkit-scrollbar-thumb,
+#typora-sidebar::-webkit-scrollbar-thumb,
+#typora-source::-webkit-scrollbar-thumb,
+#typora-source .CodeMirror-scroll::-webkit-scrollbar-thumb,
+.sidebar-content::-webkit-scrollbar-thumb,
+.file-tree::-webkit-scrollbar-thumb,
+.outline-content::-webkit-scrollbar-thumb {
+  background-color: var(--gp-scrollbar-thumb);
+  border-radius: 10px;
+  border: 3px solid transparent; /* 制造与轨道之间的空隙 */
+  background-clip: padding-box; /* 只画 border 内，形成细条 */
+}
+#write::-webkit-scrollbar-thumb:hover,
+#typora-sidebar::-webkit-scrollbar-thumb:hover,
+#typora-source::-webkit-scrollbar-thumb:hover,
+#typora-source .CodeMirror-scroll::-webkit-scrollbar-thumb:hover,
+.sidebar-content::-webkit-scrollbar-thumb:hover,
+.file-tree::-webkit-scrollbar-thumb:hover,
+.outline-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gp-scrollbar-thumb-hover);
+  border-width: 1px; /* hover 缩小 border = 加宽 */
+}
+#write::-webkit-scrollbar-corner,
+#typora-sidebar::-webkit-scrollbar-corner,
+#typora-source::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   【15】底部状态栏（仅样式；字数统计等原生功能保持不动）
+   -------------------------------------------------------------------------- */
+.ty-footer {
+  background-color: var(--gp-status-bg);
+  color: var(--gp-status-text);
+  border-top: 1px solid var(--gp-status-border);
+  font-family: var(--gp-font-sans);
+  font-size: 13px;
+}
+
+/* --------------------------------------------------------------------------
+   【16】细节配色（选区 / 搜索命中 / 脚注 / 数学 / 分隔块）
+   -------------------------------------------------------------------------- */
+::selection {
+  background-color: var(--gp-selection-bg);
+  color: inherit;
+}
+/* 所见即所得模式：搜索命中文本包裹在 span 内（.md-search-hit） */
+.md-search-hit {
+  background-color: var(--gp-search-hit-bg);
+  border-radius: 2px;
+  color: inherit;
+}
+/* 源码模式搜索命中（.cm-overlay.cm-search-hit） */
+.cm-search-hit {
+  background-color: var(--gp-search-hit-bg);
+}
+/* 脚注 */
+.md-footnote {
+  color: var(--gp-link);
+  font-size: 0.8em;
+  vertical-align: super;
+}
+/* 数学公式行内底色 */
+.md-mathjax-midline {
+  background-color: var(--gp-inline-code-bg);
+}
+.md-mathjax-midline code {
+  background: transparent;
+  border: 0;
+}
+/* mermaid 图表文本随主题配色（浅色下为深色文字，可读） */
+#write .md-diagram-panel svg text,
+#write .md-diagram-panel svg tspan,
+#write .md-diagram-panel svg .nodeLabel,
+#write .md-diagram-panel svg .label,
+#write .md-diagram-panel svg .edgeLabel,
+#write .md-diagram-panel svg .clusterLabel,
+#write .md-diagram-panel-preview svg text,
+#write .md-diagram-panel-preview svg tspan,
+#write .md-diagram-panel-preview svg .nodeLabel,
+#write .md-diagram-panel-preview svg .label,
+#write .md-diagram-panel-preview svg .edgeLabel {
+  fill: var(--gp-text) !important;
+  color: var(--gp-text) !important;
+}
+
+/* --------------------------------------------------------------------------
+   【窗口布局】侧边栏与编辑区圆角 + 中间留一点缝（浮动卡片感）。
+   注意：属布局层面的样式改动，若侧栏拖宽/折叠出现异常，请告诉我窗口级 DOM。
+   -------------------------------------------------------------------------- */
+#typora-sidebar {
+  border-radius: 0 10px 10px 0;
+  margin-right: 10px;
+}
+content,
+#write {
+  border-radius: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   【17】平滑滚动（不生效或不喜欢可删除此段）
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --------------------------------------------------------------------------
+   【18】PDF / 打印导出优化
+   说明：@media print 强制使用浅色变量（深色主题导出仍是白底黑字）；
+   去阴影、去大面积背景；@page 设置页边距（与 Typora 导出设置的冲突以实测为准）。
+   页码无法实现（Chromium 不支持 @page 页码盒）。
+   -------------------------------------------------------------------------- */
+@media print {
+  /* 强制浅色（无论当前深浅主题） */
+  :root {
+    --gp-bg: #ffffff;
+    --gp-text: #24292f;
+    --gp-text-muted: #57606a;
+    --gp-text-faint: #8c959f;
+    --gp-border: #d0d7de;
+    --gp-border-light: #eaeef2;
+    --gp-inline-code-bg: rgba(175, 184, 193, 0.2);
+    --gp-code-bg: #f6f8fa;
+    --gp-code-fence-bg: #f6f8fa;
+    --gp-code-fence-border: #d0d7de;
+    --gp-code-text: #24292e;
+    --gp-quote-bg: #f6f8fa;
+    --gp-quote-border: #d0d7de;
+    --gp-table-header-bg: #f6f8fa;
+    --gp-table-stripe: #fbfcfd;
+    --gp-table-hover: #f0f3f6;
+    --gp-meta-bg: #f6f8fa;
+    --gp-meta-border: #d0d7de;
+    --gp-cm-text: #24292e;
+    --gp-cm-comment: #6a737d;
+    --gp-cm-keyword: #d73a49;
+    --gp-cm-string: #032f62;
+    --gp-cm-number: #005cc5;
+    --gp-cm-function: #6f42c1;
+    --gp-cm-variable: #24292e;
+    --gp-cm-type: #d73a49;
+    --gp-cm-tag: #22863a;
+    --gp-cm-attribute: #6f42c1;
+    --gp-cm-builtin: #005cc5;
+    --gp-cm-operator: #d73a49;
+    --gp-cm-meta: #032f62;
+    --gp-cm-property: #005cc5;
+    --gp-cm-header: #005cc5;
+    --gp-cm-link: #032f62;
+    --gp-cm-hr: #24292e;
+    --gp-cm-error: #b31d28;
+    --gp-cm-text-faint: #8c959f;
+  }
+  html {
+    font-size: 13px;
+  }
+  #write {
+    background-color: #ffffff !important;
+    color: #24292f !important;
+  }
+  body {
+    background-color: #ffffff;
+  }
+
+  /* 去阴影 / 去大面积背景，仅保留文字与结构 */
+  .md-fences,
+  blockquote,
+  #write pre.md-meta-block,
+  .md-toc,
+  table {
+    box-shadow: none !important;
+  }
+  .md-fences,
+  .md-toc {
+    background-color: #f6f8fa !important;
+  }
+  #write pre.md-meta-block {
+    background-color: #f6f8fa !important;
+  }
+  blockquote {
+    background-color: #f6f8fa !important;
+  }
+  .md-fences::before {
+    content: none;
+  } /* 打印时去掉圆点 */
+  #write pre.md-meta-block::before {
+    content: none;
+  } /* 打印时去掉 YAML 角标 */
+
+  /* 防断页 */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+  pre,
+  .md-fences,
+  table,
+  .md-image,
+  blockquote,
+  #write pre.md-meta-block {
+    break-inside: avoid;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+}
+
+/* @page 页边距：Chromium 不允许 @page 嵌套在 @media 内，必须置于顶层 */
+@page {
+  margin: 18mm 16mm;
+}

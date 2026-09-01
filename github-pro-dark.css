@@ -1,0 +1,1095 @@
+@import url("./github/base.css");
+
+/*
+ * GitHub Dark
+ *
+ * This theme imports Typora's GitHub base styles from github/base.css so the
+ * typography and layout stay familiar. The declarations below provide the
+ * dark color system and complete Windows interface integration.
+ */
+
+:root {
+    color-scheme: dark;
+
+    --bg-color: #0d1117;
+    --side-bar-bg-color: #010409;
+    --text-color: #b8c0cc;
+    --text-strong-color: #cdd4dd;
+    --text-bold-color: #f0f6fc;
+    --text-muted-color: #858f9b;
+    --accent-color: #78a7d1;
+    --accent-hover-color: #8bb5d9;
+    --surface-overlay: #161b22;
+    --surface-raised: #21262d;
+    --surface-active: #1f2937;
+    --border-color: #30363d;
+    --hint-color: #858f9b;
+    --control-text-color: var(--text-muted-color);
+    --control-text-hover-color: var(--text-strong-color);
+    --primary-color: var(--accent-color);
+    --window-border: 1px solid #30363d;
+
+    --select-text-bg-color: rgba(120, 167, 209, 0.3);
+    --select-text-font-color: #d8dee6;
+    --item-hover-bg-color: #161b22;
+    --item-hover-text-color: var(--text-strong-color);
+    --active-file-bg-color: #1f2937;
+    --active-file-border-color: var(--accent-color);
+    --active-file-text-color: var(--text-strong-color);
+    --search-select-bg-color: rgba(174, 126, 35, 0.35);
+    --rawblock-edit-panel-bd: #161b22;
+    --mermaid-theme: night;
+}
+
+html,
+body {
+    background-color: var(--bg-color);
+}
+
+body,
+button,
+input,
+select,
+textarea,
+.CodeMirror,
+div.code-tooltip-content {
+    color: var(--text-color);
+}
+
+body {
+    font-weight: 500;
+}
+
+::selection,
+*.in-text-selection {
+    color: var(--select-text-font-color);
+    background-color: var(--select-text-bg-color);
+}
+
+a {
+    color: var(--accent-color);
+}
+
+a:hover,
+a:active {
+    color: var(--accent-hover-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+th {
+    color: var(--text-strong-color);
+}
+
+strong,
+b,
+.cm-strong {
+    color: var(--text-bold-color);
+}
+
+h1,
+h2 {
+    border-bottom-color: #21262d;
+}
+
+h6,
+blockquote,
+#write pre.md-meta-block {
+    color: var(--text-muted-color);
+}
+
+hr {
+    background-color: #30363d;
+}
+
+blockquote {
+    border-left-color: #30363d;
+}
+
+.on-focus-mode blockquote {
+    border-left-color: rgba(139, 148, 158, 0.2);
+}
+
+table tr,
+table th,
+table td {
+    border-color: #30363d;
+}
+
+table tr:nth-child(2n),
+thead {
+    background-color: #161b22;
+}
+
+.md-fences,
+code,
+tt {
+    color: var(--text-color);
+    background-color: #161b22;
+    border-color: #30363d;
+}
+
+code {
+    background-color: rgba(110, 118, 129, 0.2);
+}
+
+.code-tooltip,
+.md-hover-tip {
+    color: var(--text-color);
+    background-color: #161b22;
+    border-color: #30363d;
+    box-shadow: 0 1px 1px 0 rgba(1, 4, 9, 0.8);
+}
+
+.code-tooltip {
+    border-top-color: #30363d;
+}
+
+.popover.bottom > .arrow::after {
+    border-bottom-color: #161b22;
+}
+
+#write pre.md-meta-block,
+.md-mathjax-midline {
+    background-color: #161b22;
+}
+
+.md-tag,
+.md-meta,
+.md-image > .md-meta {
+    color: var(--text-muted-color);
+}
+
+.md-lang {
+    color: #b6a0cb;
+}
+
+.md-inline-math script,
+.md-mathjax-midline,
+.mathjax-block {
+    color: var(--text-color);
+}
+
+/* Mermaid diagrams */
+.md-diagram-panel[lang="mermaid"],
+.md-diagram-panel-preview,
+[lang="mermaid"] svg {
+    color: var(--text-color);
+    background-color: transparent;
+}
+
+[lang="mermaid"] .node rect,
+[lang="mermaid"] .node circle,
+[lang="mermaid"] .node ellipse,
+[lang="mermaid"] .node polygon,
+[lang="mermaid"] .node path,
+[lang="mermaid"] .actor,
+[lang="mermaid"] .classGroup rect,
+[lang="mermaid"] .stateGroup rect {
+    fill: #161b22 !important;
+    stroke: var(--accent-color) !important;
+}
+
+[lang="mermaid"] text,
+[lang="mermaid"] .label,
+[lang="mermaid"] .nodeLabel,
+[lang="mermaid"] .messageText,
+[lang="mermaid"] .loopText,
+[lang="mermaid"] .noteText,
+[lang="mermaid"] .labelText,
+[lang="mermaid"] .classText,
+[lang="mermaid"] .state-title {
+    color: var(--text-color) !important;
+    fill: var(--text-color) !important;
+}
+
+[lang="mermaid"] .edgeLabel,
+[lang="mermaid"] .edgeLabel rect,
+[lang="mermaid"] .labelBox {
+    color: var(--text-color) !important;
+    fill: #0d1117 !important;
+    background-color: #0d1117 !important;
+    stroke: #30363d !important;
+}
+
+[lang="mermaid"] .flowchart-link,
+[lang="mermaid"] .edgePath .path,
+[lang="mermaid"] .relation,
+[lang="mermaid"] .transition,
+[lang="mermaid"] .messageLine0,
+[lang="mermaid"] .messageLine1,
+[lang="mermaid"] .actor-line,
+[lang="mermaid"] .loopLine {
+    stroke: var(--text-muted-color) !important;
+}
+
+[lang="mermaid"] marker path,
+[lang="mermaid"] .arrowheadPath {
+    fill: var(--text-muted-color) !important;
+    stroke: var(--text-muted-color) !important;
+}
+
+[lang="mermaid"] .cluster rect,
+[lang="mermaid"] .note,
+[lang="mermaid"] .activation0,
+[lang="mermaid"] .activation1,
+[lang="mermaid"] .activation2 {
+    fill: #21262d !important;
+    stroke: #484f58 !important;
+}
+
+[lang="mermaid"] .task,
+[lang="mermaid"] .task0,
+[lang="mermaid"] .task1,
+[lang="mermaid"] .task2,
+[lang="mermaid"] .task3 {
+    fill: #315f8a !important;
+    stroke: var(--accent-color) !important;
+}
+
+[lang="mermaid"] .section,
+[lang="mermaid"] .section0,
+[lang="mermaid"] .section1,
+[lang="mermaid"] .section2,
+[lang="mermaid"] .section3 {
+    fill: #21262d !important;
+    stroke: #30363d !important;
+}
+
+mark {
+    color: var(--text-strong-color);
+    background-color: rgba(158, 112, 25, 0.38);
+}
+
+sup.md-footnote {
+    color: var(--accent-hover-color);
+    background-color: rgba(120, 167, 209, 0.14);
+}
+
+kbd {
+    color: var(--text-color);
+    background-color: #21262d;
+    border-color: #30363d;
+}
+
+input,
+textarea,
+select,
+button,
+.btn,
+.form-control {
+    color: var(--text-color);
+    background-color: #0d1117;
+    border-color: #30363d;
+    font-weight: 500;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus,
+.btn:focus,
+.form-control:focus {
+    border-color: var(--accent-color);
+}
+
+.md-task-list-item > input::before {
+    background-color: #0d1117;
+    border-color: var(--text-muted-color);
+}
+
+.md-task-list-item > input:checked::before,
+.md-task-list-item > input[checked]::before {
+    color: var(--text-strong-color);
+    background-color: #315f8a;
+    border-color: #527fa8;
+}
+
+/* Editor and source-mode colors */
+#typora-source .CodeMirror-gutters,
+#typora-source .CodeMirror-scroll,
+#typora-source .CodeMirror-sizer,
+.cm-s-typora-default.CodeMirror {
+    background-color: #0d1117;
+}
+
+/* Code-fence internals inherit the fence surface instead of drawing black rows. */
+.md-fences .CodeMirror,
+.md-fences .CodeMirror-gutters,
+.md-fences .CodeMirror-scroll,
+.md-fences .CodeMirror-sizer,
+.md-fences .CodeMirror-lines,
+.md-fences .CodeMirror-code,
+.md-fences .CodeMirror-line,
+.md-fences pre {
+    background-color: transparent !important;
+}
+
+.CodeMirror-gutters {
+    border-right-color: #21262d;
+}
+
+.CodeMirror-linenumber,
+.CodeMirror-guttermarker-subtle {
+    color: #6e7681;
+}
+
+.CodeMirror div.CodeMirror-cursor,
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
+    border-left-color: var(--text-strong-color);
+}
+
+.CodeMirror-selected,
+.cm-s-typora-default .CodeMirror-selected {
+    color: var(--text-strong-color) !important;
+    background-color: var(--select-text-bg-color) !important;
+}
+
+/* Keep only the CodeMirror selection layer, without a second text background. */
+.CodeMirror-selectedtext {
+    color: var(--text-strong-color) !important;
+    background-color: transparent !important;
+}
+
+.CodeMirror-activeline-background,
+.cm-s-typora-default .CodeMirror-activeline-background {
+    background-color: rgba(110, 118, 129, 0.12);
+}
+
+.cm-s-inner .cm-variable,
+.cm-s-inner .cm-variable-2,
+.cm-s-inner .cm-variable-3,
+.cm-s-inner .cm-operator,
+.cm-s-inner .cm-property,
+.cm-s-inner .cm-bracket,
+.cm-s-inner .cm-qualifier,
+.cm-s-typora-default .cm-variable,
+.cm-s-typora-default .cm-property {
+    color: var(--text-color);
+}
+
+.cm-s-inner .cm-comment,
+.cm-s-inner.cm-comment,
+.cm-s-typora-default .cm-comment {
+    color: var(--text-muted-color);
+}
+
+.cm-s-inner .cm-keyword,
+.cm-s-inner .cm-atom,
+.cm-s-inner.cm-atom,
+.cm-s-inner .cm-number,
+.cm-s-inner .cm-builtin,
+.cm-s-typora-default .cm-atom,
+.cm-s-typora-default .cm-number {
+    color: #d88b85;
+}
+
+.cm-s-inner .cm-string,
+.cm-s-inner .cm-string-2,
+.cm-s-typora-default .cm-string {
+    color: #9ebdd5;
+}
+
+.cm-s-inner .cm-tag,
+.cm-s-inner .cm-positive,
+.cm-s-inner .cm-quote,
+.cm-s-inner.cm-quote {
+    color: #8fba91;
+}
+
+.cm-s-inner .cm-def,
+.cm-s-inner.cm-def,
+.cm-s-inner .cm-attribute,
+.cm-s-inner .cm-meta {
+    color: #b6a0cb;
+}
+
+.cm-s-inner .cm-header,
+.cm-s-inner.cm-header,
+.cm-s-inner .cm-link,
+.cm-s-typora-default .cm-header,
+.cm-s-typora-default .cm-link {
+    color: var(--accent-hover-color);
+}
+
+.cm-s-inner .cm-negative,
+.cm-s-inner .cm-error {
+    color: #dca09a;
+}
+
+.cm-s-inner .cm-hr {
+    color: #484f58;
+}
+
+/* Sidebar, file tree and outline */
+#typora-sidebar,
+.sidebar-content,
+.sidebar-footer {
+    color: var(--text-muted-color);
+    background-color: var(--side-bar-bg-color);
+    border-color: #21262d;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: var(--side-bar-bg-color);
+}
+
+.sidebar-tabs,
+.sidebar-tabs-content {
+    color: var(--text-muted-color);
+    border-color: #21262d;
+}
+
+.sidebar-tab.active,
+.file-list-item.active,
+.file-tree-node.active > .file-node-content {
+    color: var(--active-file-text-color);
+    background-color: var(--active-file-bg-color);
+}
+
+.file-list-item:hover,
+.file-node-content:hover,
+.outline-item:hover {
+    color: var(--item-hover-text-color);
+    background-color: var(--item-hover-bg-color);
+}
+
+/* Dark, restrained selection treatment for documents in File List view. */
+#file-library-list-children .file-list-item.active {
+    color: var(--text-strong-color) !important;
+    background-color: #111d2b !important;
+    box-shadow: inset 2px 0 0 #527fa8;
+    transition: color 0.12s ease, background-color 0.12s ease;
+}
+
+#file-library-list-children .file-list-item.active:hover,
+#file-library-list-children .file-list-item.active:focus {
+    color: var(--text-strong-color) !important;
+    background-color: #142337 !important;
+    outline: 0;
+}
+
+#file-library-list-children .file-list-item.active .file-list-item-file-name {
+    color: #d8dee6 !important;
+    font-weight: 600;
+}
+
+#file-library-list-children .file-list-item.active .file-list-item-parent-loc,
+#file-library-list-children .file-list-item.active .file-list-item-time,
+#file-library-list-children .file-list-item.active .file-list-item-summary {
+    color: #8b949e !important;
+    opacity: 1;
+}
+
+#outline-content .outline-item-active,
+#outline-content .outline-item-active .outline-label,
+#outline-content .outline-item-wrapper.outline-item-active > .outline-item,
+#outline-content .outline-item-wrapper.outline-item-active > .outline-item .outline-label,
+#outline-content .outline-item-wrapper.outline-item-active > .outline-item .outline-expander {
+    color: var(--text-strong-color) !important;
+}
+
+.file-node-icon,
+.file-node-open-state,
+.outline-expander {
+    color: var(--text-muted-color);
+}
+
+/*
+ * Keep the standardized properties at their initial values. Chromium ignores
+ * all ::-webkit-scrollbar-* styling when either property is non-auto.
+ */
+* {
+    scrollbar-color: auto !important;
+    scrollbar-width: auto !important;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-corner {
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #282e35 !important;
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:horizontal,
+::-webkit-scrollbar-button:vertical,
+::-webkit-scrollbar-button:start,
+::-webkit-scrollbar-button:end {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #343b44 !important;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #414a55 !important;
+}
+
+/* Quick Open, search and transient panels */
+#typora-quick-open,
+.auto-suggest-container {
+    color: var(--text-color);
+    background-color: #161b22;
+    border-color: #30363d;
+}
+
+#typora-quick-open input {
+    color: var(--text-strong-color);
+    background-color: #0d1117;
+    border-color: #30363d;
+}
+
+#typora-quick-open-item,
+.typora-quick-open-item {
+    color: var(--text-color);
+    background-color: #161b22;
+    border-color: #21262d #30363d #30363d #21262d;
+}
+
+.typora-quick-open-item.active,
+.typora-quick-open-item:hover {
+    color: var(--text-strong-color);
+    background-color: #315f8a;
+}
+
+.md-search-hit,
+.md-search-select,
+.searchpanel-search-option-btn.active {
+    color: var(--text-strong-color);
+    background-color: rgba(174, 126, 35, 0.35);
+}
+
+.searchpanel-search-option-btn,
+.searchpanel-search-option-btn:hover {
+    color: var(--text-color);
+    background-color: #21262d;
+    border-color: #30363d;
+}
+
+/* Windows application chrome */
+footer,
+.ty-editor-toolbar,
+.ty-editor-toolbar-menu {
+    color: var(--text-color);
+    background-color: var(--surface-overlay);
+    border-color: var(--border-color);
+}
+
+/* Merge the Windows caption into the editor canvas. */
+header,
+#top-titlebar {
+    color: var(--text-color);
+    background-color: var(--bg-color) !important;
+    background-image: none !important;
+    border-color: transparent !important;
+}
+
+.os-windows #top-titlebar,
+.unibody-window #top-titlebar {
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.os-windows.paint-border header,
+.unibody-window.paint-border header {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+#top-titlebar,
+#top-titlebar .title-text,
+#top-titlebar .toolbar-icon,
+#top-titlebar .ty-icon {
+    color: var(--text-muted-color) !important;
+}
+
+/* Generic button styles must not draw boxes around Windows caption controls. */
+#w-traffic-lights,
+#w-max-group,
+#w-traffic-lights .toolbar-icon.btn,
+#w-traffic-lights .toolbar-icon.btn:focus,
+#w-traffic-lights .toolbar-icon.btn:active,
+#w-top-margin {
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-color: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+#top-titlebar .toolbar-icon.btn.hover,
+#top-titlebar .toolbar-icon.btn:hover,
+#w-menu-btn:hover,
+#w-max-group.mouse-hover,
+#w-full.mouse-hover,
+#w-pin.mouse-hover {
+    color: var(--text-bold-color) !important;
+    background-color: var(--surface-raised) !important;
+}
+
+#top-titlebar #w-close:hover {
+    color: #ffffff !important;
+    background-color: #c42b1c !important;
+}
+
+#w-unpin {
+    color: #ffffff !important;
+    background-color: #315f8a !important;
+}
+
+.paint-border content {
+    border-color: var(--border-color) !important;
+}
+
+/* The menu overlays the title bar on Windows; hide both underlying top edges. */
+.megamenu-opened #top-titlebar {
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.paint-border .megamenu-content {
+    border-color: var(--border-color) !important;
+    border-top: 0 !important;
+}
+
+footer.ty-footer {
+    border-top-color: transparent !important;
+}
+
+#footer-word-count:hover,
+.ty-show-spell-check #footer-spell-check,
+.ty-show-word-count #footer-word-count,
+.sidebar-footer-item:hover,
+.footer-item:hover {
+    color: var(--text-strong-color) !important;
+    background-color: var(--surface-raised) !important;
+}
+
+/* Context menus, dropdowns, spellcheck and word-count panels */
+.context-menu,
+.dropdown-menu,
+.auto-suggest-container,
+#spell-check-panel,
+#footer-word-count-info,
+#sidebar-files-menu,
+#toc-dropmenu {
+    color: var(--text-color) !important;
+    background: var(--surface-overlay) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 8px 24px rgba(1, 4, 9, 0.55) !important;
+}
+
+.context-menu > li > a,
+.context-menu .menu-item,
+.dropdown-menu > li > a,
+.dropdown-menu .menu-item-container,
+.dropdown-menu .menu-style-btn {
+    color: var(--text-color) !important;
+    background-color: transparent;
+}
+
+.context-menu > li > a:hover,
+.context-menu > li > a:focus,
+.context-menu .menu-item.active,
+.context-menu .menu-item:hover,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.menu-style-btn.active,
+.ty-spell-check-panel-item.ty-active,
+.ty-spell-check-panel-item:hover {
+    color: var(--text-strong-color) !important;
+    background-color: var(--surface-raised) !important;
+}
+
+.context-menu .disabled,
+.context-menu .disabled a,
+.dropdown-menu .disabled,
+.dropdown-menu .disabled a,
+.menu-style-btn.disabled,
+.menu-style-btn.disabled:hover {
+    color: #6e7681 !important;
+    background-color: transparent !important;
+}
+
+.dropdown-menu .divider,
+.context-menu.dropdown-menu .divider,
+.menuitem-group-label {
+    color: var(--text-muted-color) !important;
+    background-color: transparent !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Windows menu page */
+.megamenu-content {
+    color: var(--text-color) !important;
+    background-color: var(--bg-color) !important;
+    background-image: none !important;
+    border-color: var(--border-color) !important;
+}
+
+.megamenu-menu-section,
+.megamenu-menu-panel,
+#recent-file-panel,
+#recent-file-pane {
+    color: var(--text-color) !important;
+    background: transparent !important;
+}
+
+#megamenu-menu-sidebar,
+.megamenu-menu {
+    color: var(--text-color) !important;
+    background: var(--surface-overlay) !important;
+    border-right: 1px solid var(--border-color) !important;
+    box-shadow: 2px 0 12px rgba(1, 4, 9, 0.45) !important;
+}
+
+.megamenu-menu-header {
+    color: var(--text-color) !important;
+    background: var(--surface-raised) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+#megamenu-back-btn,
+#megamenu-menu-header-title,
+.megamenu-menu-header #megamenu-menu-header-title,
+.megamenu-menu-header #megamenu-menu-header-title::before {
+    color: var(--text-strong-color) !important;
+    border-color: var(--text-muted-color) !important;
+}
+
+#megamenu-menu-list,
+.megamenu-menu-list.dropdown-menu {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+#megamenu-menu-list li,
+#megamenu-menu-list li:hover {
+    background: transparent !important;
+}
+
+#megamenu-menu-list li a {
+    color: var(--text-color) !important;
+    background: transparent !important;
+}
+
+#megamenu-menu-list li a.active,
+#megamenu-menu-list li a:hover {
+    color: var(--text-bold-color) !important;
+    background-color: var(--surface-active) !important;
+}
+
+.megamenu-menu-panel h1,
+.megamenu-menu-panel h2,
+.megamenu-menu-panel table td,
+.megamenu-menu-panel table th,
+.recent-file-item,
+.recent-file-name {
+    color: var(--text-color) !important;
+}
+
+.megamenu-menu-panel h1,
+.megamenu-menu-panel h2 {
+    border-color: transparent !important;
+}
+
+#recent-file-panel tbody tr,
+#recent-file-panel tbody tr:nth-child(2n),
+#recent-file-panel tbody tr:nth-child(2n-1),
+.megamenu-menu-panel table tr {
+    color: var(--text-color) !important;
+    background: transparent !important;
+    border-color: var(--border-color) !important;
+}
+
+#recent-file-panel tbody tr:hover,
+.megamenu-menu-panel tbody tr:hover,
+.recent-file-item:hover {
+    color: var(--text-strong-color) !important;
+    background-color: var(--surface-raised) !important;
+}
+
+.megamenu-menu-panel .btn,
+.long-btn,
+#recent-file-panel-action-btn {
+    color: var(--text-color) !important;
+    background: var(--surface-overlay) !important;
+    border-color: var(--border-color) !important;
+}
+
+.megamenu-menu-panel .btn:hover,
+.long-btn:hover,
+#recent-file-panel-action-btn:hover {
+    color: var(--text-bold-color) !important;
+    background: var(--surface-raised) !important;
+    border-color: #484f58 !important;
+}
+
+.theme-preview-div {
+    background-color: var(--surface-overlay) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-preview-div.active,
+.theme-preview-div:hover {
+    border-color: var(--accent-color) !important;
+}
+
+/* Dialogs, notifications, tooltips and floating editor controls */
+.modal-content,
+.popover,
+#md-notification,
+.md-notification,
+.ty-tooltip,
+#ty-tooltip,
+.ty-editor-toolbar,
+.ty-editor-toolbar-menu,
+.ty-editor-toolbar-tooltip {
+    color: var(--text-color) !important;
+    background: var(--surface-overlay) !important;
+    border-color: var(--border-color) !important;
+    box-shadow: 0 12px 32px rgba(1, 4, 9, 0.5);
+}
+
+.modal-header,
+.modal-footer,
+.popover-title {
+    border-color: var(--border-color) !important;
+}
+
+.modal-backdrop,
+.modal-backdrop.in {
+    background-color: rgba(1, 4, 9, 0.72) !important;
+    opacity: 1;
+}
+
+.modal-content .close,
+#md-notification .btn {
+    color: var(--accent-color) !important;
+    background-color: transparent !important;
+}
+
+.ty-editor-toolbar-divider,
+.ty-editor-toolbar-menu-divider {
+    background-color: var(--border-color) !important;
+}
+
+.ty-editor-toolbar-btn:hover,
+.ty-editor-toolbar-btn.active,
+.ty-editor-toolbar-menu-item:hover,
+.ty-editor-toolbar-menu-item.active {
+    color: var(--text-strong-color) !important;
+    background-color: var(--surface-raised) !important;
+}
+
+/* Preferences and export pages (loaded in a separate Windows webview). */
+.ty-preferences,
+.ty-preferences .window,
+.ty-preferences .window-content,
+.ty-preferences .pane,
+.ty-preferences .pane-group {
+    color: var(--text-color) !important;
+    background: var(--bg-color) !important;
+}
+
+.ty-preferences .sidebar,
+.ty-preferences .window-header {
+    color: var(--text-color) !important;
+    background: var(--surface-overlay) !important;
+    border-color: var(--border-color) !important;
+    box-shadow: 0 1px 0 var(--border-color) !important;
+}
+
+.ty-preferences .nav-group-item,
+.ty-preferences .list-group-item {
+    color: var(--text-muted-color) !important;
+    background-color: transparent;
+}
+
+.ty-preferences .nav-group-item:hover,
+.ty-preferences .nav-group-item:active,
+.ty-preferences .nav-group-item.active,
+.ty-preferences .list-group-item:hover,
+.ty-preferences .list-group-item.active,
+.ty-preferences .list-group-item.selected {
+    color: var(--text-strong-color) !important;
+    background-color: var(--surface-active) !important;
+}
+
+.ty-preferences input:not([type="range"]):not([type="color"]),
+.ty-preferences textarea,
+.ty-preferences select,
+.ty-preferences .form-control,
+.ty-preferences .input-autocomplete {
+    color: var(--text-color) !important;
+    background: var(--bg-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+.ty-preferences option,
+.ty-preferences optgroup {
+    color: var(--text-color);
+    background-color: var(--surface-overlay);
+}
+
+.ty-preferences input:focus,
+.ty-preferences textarea:focus,
+.ty-preferences select:focus {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 1px var(--accent-color) !important;
+}
+
+.ty-preferences input[type="checkbox"],
+.ty-preferences input[type="radio"],
+.ty-preferences input[type="range"] {
+    accent-color: var(--accent-color);
+}
+
+.ty-preferences .btn,
+.ty-preferences .btn-default,
+.ty-preferences .btn-default:not(:hover) {
+    color: var(--text-color) !important;
+    background: var(--surface-overlay) !important;
+    border-color: var(--border-color) !important;
+    box-shadow: none !important;
+}
+
+.ty-preferences .btn:hover,
+.ty-preferences .btn:focus,
+.ty-preferences .btn-default:hover,
+.ty-preferences .btn-default:focus {
+    color: var(--text-bold-color) !important;
+    background: var(--surface-raised) !important;
+    border-color: #484f58 !important;
+}
+
+.ty-preferences .export-detail,
+.ty-preferences .export-items-list-control,
+.ty-preferences .export-item.active,
+.ty-preferences.light .export-detail,
+.ty-preferences.light .export-items-list-control,
+.ty-preferences.light .export-item.active {
+    color: var(--text-strong-color) !important;
+    background: var(--surface-active) !important;
+    border-color: var(--border-color) !important;
+}
+
+.ty-preferences .export-item:hover:not(.active),
+.ty-preferences .input-autocomplete-row:hover,
+.ty-preferences .input-autocomplete-row.active,
+.ty-preferences .dropdown-menu li:hover {
+    color: var(--text-strong-color) !important;
+    background: var(--surface-raised) !important;
+}
+
+.ty-preferences .modal-title,
+.ty-preferences .modal-footer,
+.ty-preferences .separator,
+.ty-preferences hr {
+    border-color: var(--border-color) !important;
+}
+
+/* Source-mode exit control: replace Typora's built-in light active surface. */
+.typora-sourceview-on #toggle-sourceview-btn {
+    color: var(--text-strong-color) !important;
+    background-color: #21262d !important;
+}
+
+.typora-sourceview-on #toggle-sourceview-btn:hover {
+    color: var(--text-bold-color) !important;
+    background-color: #30363d !important;
+}
+
+/* Compact, flat toolbar groups inside the context menu. */
+.menu-item-container {
+    display: flex !important;
+    align-items: center;
+    gap: 2px;
+    margin: 1px 6px;
+    padding: 3px 4px !important;
+    background-color: rgba(110, 118, 129, 0.08) !important;
+    border-radius: 6px;
+}
+
+.menu-item-container a.menu-style-btn,
+.menu-item-container a.menu-style-btn-2width {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 0;
+    width: auto !important;
+    min-width: 0;
+    height: 26px;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: var(--text-muted-color) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    transition: color 0.1s ease, background-color 0.1s ease;
+}
+
+.menu-item-container a.menu-style-btn .ty-icon {
+    margin: 0 !important;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.menu-item-container a.menu-style-btn:hover,
+.menu-item-container a.menu-style-btn:focus {
+    color: var(--text-strong-color) !important;
+    background-color: var(--surface-raised) !important;
+    outline: 0 !important;
+}
+
+.menu-item-container a.menu-style-btn.active {
+    color: var(--accent-hover-color) !important;
+    background-color: rgba(120, 167, 209, 0.16) !important;
+}
+
+.menu-item-container a.menu-style-btn.disabled,
+.menu-item-container a.menu-style-btn.disabled:hover {
+    color: #6e7681 !important;
+    background-color: transparent !important;
+    opacity: 0.4;
+}
+
+#md-notification .btn {
+    color: var(--accent-color);
+    background-color: transparent;
+}
+
+.ty-table-edit,
+.md-rawblock-tooltip,
+.md-rawblock-control,
+.md-rawblock-panel {
+    color: var(--text-color);
+    background-color: #161b22;
+    border-color: #30363d;
+}
+
+.mac-os #write {
+    caret-color: var(--accent-color);
+}
