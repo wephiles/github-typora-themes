@@ -1,0 +1,34 @@
+/*代码块配置区域*/
+#write .CodeMirror-wrap .CodeMirror-code pre {
+  font-size: 16px;
+  font-family:
+    "Inconsolata", "Source Code Pro", "Consolas", "Microsoft YaHei", monospace;
+}
+.md-fences {
+  font-family:
+    "Inconsolata", "Source Code Pro", "Consolas", "Microsoft YaHei", monospace;
+}
+
+/*行内代码配置区域*/
+#write code {
+  font-family:
+    "Inconsolata", "Source Code Pro", "Consolas", "JetBrains Mono", Consolas,
+    monospace;
+  font-size: 0.99em; /* 相对正文缩放，也可以写具体值如 14px */
+  background-color: #f0f0f0;
+  padding: 0.1em 0.2em;
+  border-radius: 4px;
+}
+
+/*可编辑区域宽度
+  ★ 编辑区宽度统一在这里修改。已加 !important，优先级高于任何主题内部的宽度设置，
+    ladder / ladder-dark 等所有主题都会生效（原 ladder 主题内的 80rem / 60ch 限制已移除） */
+#write {
+  max-width: 85% !important; /* 占屏幕宽度的 85%，想改宽度只动这一行 */
+  margin: 0 auto;
+  padding: 20px 30px 100px;
+}
+
+#typora-source .CodeMirror-lines {
+  max-width: 85% !important; /* 源代码模式同步生效 */
+}

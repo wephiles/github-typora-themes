@@ -1,0 +1,234 @@
+/* you can override the default max-width size here or override each style by your custom css */
+/* Ladder-Pro 注：编辑区宽度已统一交由 base.user.css 控制（#write 的 max-width），
+   此处不再设置宽度，避免在 base.user.css 之后加载而覆盖用户配置 */
+
+#write {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+}
+
+p {
+    line-height: 2rem;
+}
+
+pre,
+code,
+kbd,
+tt,
+var {
+    font-size: 0.875em;
+}
+
+/* ============================================================================
+ * Ladder-Pro 自定义扩展层（ladder / ladder-dark 两版共用，追加于底座样式之后）
+ *
+ *   1. Front Matter / 代码块 / TOC 卡片左上角 Mac 三圆点
+ *   2. [TOC] 目录卡片化（含“目录”提示条对齐修复、卡片与正文同宽修正）
+ *   3. 表格卡片化（圆角 + 列间竖线 + 斑马纹 + 悬停加深）
+ *   4. 引用块卡片化（保留原主题左侧强调边与首尾引号）
+ *   5. 横向分割线加粗（1px → 2px）+ 上下留白收紧
+ *   6. 左侧文件树字体加粗
+ *   7. 代码块上下间距收紧
+ *   8. 标题字号梯度（h2–h6 增大，自 h1 起逐级平缓递减）
+ *   9. Mermaid 图表卡片化
+ *
+ *   微调方法：
+ *     - 圆点大小 / 间距 → --pro-dot-size / --pro-dot-gap（下方 ：root 中）
+ *     - 圆点左边距      → 第 1 节末尾各组件 ::before 的 margin-left
+ *     - 斑马纹 / 悬停色 → --pro-zebra-bg / --pro-row-hover-bg（dark 值在 ladder-new-dark.css）
+ *     - 行号分隔竖线    → --pro-gutter-line
+ *     - 卡片圆角        → --pro-radius
+ *     - 卡片描边 / 阴影  → ladder.css（浅色值）与 ladder-dark.css（暗色重映射）中的
+ *                          --pro-card-border / --pro-shadow
+ * ========================================================================== */
+
+:root {
+  --pro-dot-red: #ff5f57;
+  --pro-dot-yellow: #febc2e;
+  --pro-dot-green: #28c840;
+  --pro-dot-size: 12px;
+  --pro-dot-gap: 6px;
+  --pro-zebra-bg: rgba(100, 116, 139, 0.06);
+  --pro-row-hover-bg: rgba(100, 116, 139, 0.13);
+  --pro-gutter-line: rgba(100, 116, 139, 0.28);
+}
+
+/* —— 1. Mac 三圆点（Front Matter / 代码块 / TOC 共用）：
+      真圆形元素 + box-shadow 偏移复制出黄 / 绿两点 —— */
+#write pre.md-meta-block::before,
+#write pre.md-fences::before,
+#write .md-toc::before {
+  content: '';
+  display: block;
+  width: var(--pro-dot-size);
+  height: var(--pro-dot-size);
+  border-radius: 50%;
+  background: var(--pro-dot-red);
+  box-shadow:
+    calc(var(--pro-dot-size) + var(--pro-dot-gap)) 0 0 0 var(--pro-dot-yellow),
+    calc((var(--pro-dot-size) + var(--pro-dot-gap)) * 2) 0 0 0 var(--pro-dot-green);
+}
+#write pre.md-meta-block::before,
+#write pre.md-fences::before,
+#write .md-toc::before {
+  margin: 2px 0 10px 2px;
+}
+/* 代码块圆点对齐：真实环境内边距由 CodeMirror 接管（≈0），
+   行号与代码的分隔线位于卡片左缘内约 43px，
+   左边距取 19px 时中间黄点圆心（+25px）正好落在该分隔线的延长线上 */
+#write pre.md-fences::before {
+  margin: 2px 0 10px 19px;
+}
+
+/* —— 2. TOC 目录卡片 —— */
+#write .md-toc {
+  position: relative;
+  box-sizing: border-box;
+  /* 左右外边距显式归 0：Typora 内置样式给 .md-toc 留了负的左右外边距，
+     会让卡片比 YAML 区 / 正文宽出约 0.5cm */
+  margin: 20px 0;
+  padding: 12px 18px 14px;
+  background: var(--tw-prose-meta-bg);
+  border: 1px solid var(--pro-card-border);
+  border-radius: var(--pro-radius);
+  box-shadow: var(--pro-shadow);
+}
+/* “目录”提示条：改为 absolute 定位钉在卡片正上方，左右边缘与卡片对齐
+   （原 relative 定位受卡片内边距影响会右偏，且出现 / 消失时挤压文档流） */
+#write .md-toc .md-toc-tooltip {
+  position: absolute;
+  top: -34px;
+  bottom: auto;
+  left: 0;
+  right: 0;
+  width: auto;
+  margin: 0;
+  padding: 4px 14px;
+  background: var(--tw-prose-meta-bg);
+  border: 1px solid var(--pro-card-border);
+  border-radius: var(--pro-radius);
+}
+
+/* —— 3. 表格卡片：圆角外框 + 列间竖线 + 斑马纹 + 悬停加深 —— */
+#write table {
+  background: var(--tw-prose-meta-bg);
+  border: 1px solid var(--pro-card-border);
+  border-radius: var(--pro-radius);
+  box-shadow: var(--pro-shadow);
+  /* Typora 默认 border-collapse: collapse 会让表格圆角和外框失效，
+     改为 separate 才能渲染圆角卡片；行底色溢出圆角的部分用 overflow 裁掉 */
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+#write table thead th {
+  padding-top: 0.9em;
+  border-bottom: 1px solid var(--tw-prose-td-borders);
+}
+/* 卡片化后首尾列不再贴边，给内容留出内边距 */
+#write table thead th:first-child,
+#write table tbody td:first-child {
+  padding-left: 1em;
+}
+#write table thead th:last-child,
+#write table tbody td:last-child {
+  padding-right: 1em;
+}
+/* 网格线画在单元格上：separate 模式下 tr 的边框会被浏览器忽略，
+   所以行间横线必须由 td 自己画；竖线只画列与列之间，首尾列不画（贴合卡片边） */
+#write table th,
+#write table td {
+  border: none;
+}
+#write table th:not(:last-child),
+#write table td:not(:last-child) {
+  border-right: 1px solid var(--tw-prose-td-borders);
+}
+#write table tbody td {
+  border-bottom: 1px solid var(--tw-prose-td-borders);
+}
+#write table tbody tr:last-child td {
+  border-bottom: none;
+}
+/* 斑马纹：偶数行浅色打底 */
+#write table tbody tr:nth-child(even) {
+  background-color: var(--pro-zebra-bg);
+}
+#write table tbody tr {
+  transition: background-color 0.15s ease;
+}
+/* 悬停加深（写在斑马纹之后，偶数行悬停时同样生效） */
+#write table tbody tr:hover {
+  background-color: var(--pro-row-hover-bg);
+}
+
+/* —— 4. 引用块卡片 —— */
+#write blockquote {
+  background: var(--tw-prose-meta-bg);
+  border: 1px solid var(--pro-card-border);
+  border-left: 0.25rem solid var(--tw-prose-quote-borders);
+  border-radius: var(--pro-radius);
+  box-shadow: var(--pro-shadow);
+  padding: 0.8em 1.2em;
+}
+
+/* —— 5. 横向分割线：加粗 + 上下留白收紧 —— */
+#write hr {
+  border-top-width: 2px;
+}
+/* 原主题上下各 2.8em：上方减半 → 1.4em，下方约缩短 1.5 倍 → 1.85em */
+#write [mdtype="hr"] {
+  margin-top: 1.4em;
+  margin-bottom: 1.85em;
+}
+
+/* —— 6. 左侧文件树字体加粗 —— */
+#file-library-tree .file-node-title,
+#file-library-tree .file-node-title-name-part,
+#file-library-tree .file-node-title-ext-part {
+  font-weight: 600;
+}
+
+/* —— 7. 代码块上下间距收紧（原 2em / 2em，首轮回调，可继续微调） —— */
+#write .md-fences {
+  margin-top: 1.1em;
+  margin-bottom: 1.3em;
+}
+/* 行号与代码区之间的分隔竖线：原用 --code-comment 太深太显眼，
+   改为极淡中性半透明色（浅色 / 暗色代码块背景上均适用） */
+#write .CodeMirror-gutters {
+  border-color: var(--pro-gutter-line);
+}
+
+/* —— 8. 标题字号梯度：h1 保持 2.5rem 不变，
+      h2–h6 整体增大，自上而下平缓递减（差距约 8.8 / 4 / 2.4 / 2.4 / 1.6 px） —— */
+#write h2 { font-size: 1.95rem; line-height: 1.4; }
+#write h3 { font-size: 1.7rem;  line-height: 1.4; }
+#write h4 { font-size: 1.55rem; line-height: 1.4; }
+#write h5 { font-size: 1.4rem;  line-height: 1.4; }
+#write h6 { font-size: 1.3rem;  line-height: 1.4; }
+
+/* —— 9. Mermaid 图表卡片 —— */
+/* 不同版本 Typora 渲染 mermaid 时的节点类名不一致（实测有的版本没有 md-mermaid），
+   用 lang 属性 / md-mermaid / md-fences-advanced 三重兜底，确保卡片一定生效 */
+#write pre.md-fences[lang="mermaid"],
+#write pre.md-fences.md-mermaid,
+#write pre.md-fences.md-fences-advanced {
+  background: var(--tw-prose-meta-bg);
+  border: 1px solid var(--pro-card-border);
+  border-radius: var(--pro-radius);
+  box-shadow: var(--pro-shadow);
+  padding: 12px 18px;
+}
+#write pre.md-fences[lang="mermaid"] .md-diagram-panel,
+#write pre.md-fences.md-mermaid .md-diagram-panel,
+#write pre.md-fences.md-fences-advanced .md-diagram-panel {
+  background: transparent !important;
+  text-align: center;
+}
+/* mermaid 卡片自带真实内边距，圆点用与 YAML / TOC 一致的小缩进 */
+#write pre.md-fences[lang="mermaid"]::before,
+#write pre.md-fences.md-mermaid::before,
+#write pre.md-fences.md-fences-advanced::before {
+  margin: 2px 0 10px 2px;
+}
