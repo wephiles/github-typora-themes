@@ -1,3 +1,11 @@
+/* ==========================================================================
+   github-pro · 深色主题（github-pro.dark.css）
+   说明：本文件基于你提供的 github-dark.css 构建，并叠加 github-pro 的功能层
+   （代码块圆角+三色圆点、YAML/TOC 卡片化、圆角表格、引用卡片、任务清单、
+   文件树导航线、光标颜色、代码选中色、打印白底黑字等）。
+   依赖：@import 了同目录 github 主题的 base.css，若未安装官方 github 主题
+   请把 github/ 文件夹一并拷到 themes 目录。
+   ========================================================================== */
 @import url("./github/base.css");
 
 /*
@@ -9,41 +17,41 @@
  */
 
 :root {
-    color-scheme: dark;
+  color-scheme: dark;
 
-    --bg-color: #0d1117;
-    --side-bar-bg-color: #010409;
-    --text-color: #b8c0cc;
-    --text-strong-color: #cdd4dd;
-    --text-bold-color: #f0f6fc;
-    --text-muted-color: #858f9b;
-    --accent-color: #78a7d1;
-    --accent-hover-color: #8bb5d9;
-    --surface-overlay: #161b22;
-    --surface-raised: #21262d;
-    --surface-active: #1f2937;
-    --border-color: #30363d;
-    --hint-color: #858f9b;
-    --control-text-color: var(--text-muted-color);
-    --control-text-hover-color: var(--text-strong-color);
-    --primary-color: var(--accent-color);
-    --window-border: 1px solid #30363d;
+  --bg-color: #0d1117;
+  --side-bar-bg-color: #010409;
+  --text-color: #b8c0cc;
+  --text-strong-color: #cdd4dd;
+  --text-bold-color: #f0f6fc;
+  --text-muted-color: #858f9b;
+  --accent-color: #78a7d1;
+  --accent-hover-color: #8bb5d9;
+  --surface-overlay: #161b22;
+  --surface-raised: #21262d;
+  --surface-active: #1f2937;
+  --border-color: #30363d;
+  --hint-color: #858f9b;
+  --control-text-color: var(--text-muted-color);
+  --control-text-hover-color: var(--text-strong-color);
+  --primary-color: var(--accent-color);
+  --window-border: 1px solid #30363d;
 
-    --select-text-bg-color: rgba(120, 167, 209, 0.3);
-    --select-text-font-color: #d8dee6;
-    --item-hover-bg-color: #161b22;
-    --item-hover-text-color: var(--text-strong-color);
-    --active-file-bg-color: #1f2937;
-    --active-file-border-color: var(--accent-color);
-    --active-file-text-color: var(--text-strong-color);
-    --search-select-bg-color: rgba(174, 126, 35, 0.35);
-    --rawblock-edit-panel-bd: #161b22;
-    --mermaid-theme: night;
+  --select-text-bg-color: rgba(120, 167, 209, 0.3);
+  --select-text-font-color: #d8dee6;
+  --item-hover-bg-color: #161b22;
+  --item-hover-text-color: var(--text-strong-color);
+  --active-file-bg-color: #1f2937;
+  --active-file-border-color: var(--accent-color);
+  --active-file-text-color: var(--text-strong-color);
+  --search-select-bg-color: rgba(174, 126, 35, 0.35);
+  --rawblock-edit-panel-bd: #161b22;
+  --mermaid-theme: night;
 }
 
 html,
 body {
-    background-color: var(--bg-color);
+  background-color: var(--bg-color);
 }
 
 body,
@@ -53,26 +61,26 @@ select,
 textarea,
 .CodeMirror,
 div.code-tooltip-content {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 
 body {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 ::selection,
 *.in-text-selection {
-    color: var(--select-text-font-color);
-    background-color: var(--select-text-bg-color);
+  color: var(--select-text-font-color);
+  background-color: var(--select-text-bg-color);
 }
 
 a {
-    color: var(--accent-color);
+  color: var(--accent-color);
 }
 
 a:hover,
 a:active {
-    color: var(--accent-hover-color);
+  color: var(--accent-hover-color);
 }
 
 h1,
@@ -81,104 +89,104 @@ h3,
 h4,
 h5,
 th {
-    color: var(--text-strong-color);
+  color: var(--text-strong-color);
 }
 
 strong,
 b,
 .cm-strong {
-    color: var(--text-bold-color);
+  color: var(--text-bold-color);
 }
 
 h1,
 h2 {
-    border-bottom-color: #21262d;
+  border-bottom-color: #21262d;
 }
 
 h6,
 blockquote,
 #write pre.md-meta-block {
-    color: var(--text-muted-color);
+  color: var(--text-muted-color);
 }
 
 hr {
-    background-color: #30363d;
+  background-color: #30363d;
 }
 
 blockquote {
-    border-left-color: #30363d;
+  border-left-color: #30363d;
 }
 
 .on-focus-mode blockquote {
-    border-left-color: rgba(139, 148, 158, 0.2);
+  border-left-color: rgba(139, 148, 158, 0.2);
 }
 
 table tr,
 table th,
 table td {
-    border-color: #30363d;
+  border-color: #30363d;
 }
 
 table tr:nth-child(2n),
 thead {
-    background-color: #161b22;
+  background-color: #161b22;
 }
 
 .md-fences,
 code,
 tt {
-    color: var(--text-color);
-    background-color: #161b22;
-    border-color: #30363d;
+  color: var(--text-color);
+  background-color: #161b22;
+  border-color: #30363d;
 }
 
 code {
-    background-color: rgba(110, 118, 129, 0.2);
+  background-color: rgba(110, 118, 129, 0.2);
 }
 
 .code-tooltip,
 .md-hover-tip {
-    color: var(--text-color);
-    background-color: #161b22;
-    border-color: #30363d;
-    box-shadow: 0 1px 1px 0 rgba(1, 4, 9, 0.8);
+  color: var(--text-color);
+  background-color: #161b22;
+  border-color: #30363d;
+  box-shadow: 0 1px 1px 0 rgba(1, 4, 9, 0.8);
 }
 
 .code-tooltip {
-    border-top-color: #30363d;
+  border-top-color: #30363d;
 }
 
 .popover.bottom > .arrow::after {
-    border-bottom-color: #161b22;
+  border-bottom-color: #161b22;
 }
 
 #write pre.md-meta-block,
 .md-mathjax-midline {
-    background-color: #161b22;
+  background-color: #161b22;
 }
 
 .md-tag,
 .md-meta,
 .md-image > .md-meta {
-    color: var(--text-muted-color);
+  color: var(--text-muted-color);
 }
 
 .md-lang {
-    color: #b6a0cb;
+  color: #b6a0cb;
 }
 
 .md-inline-math script,
 .md-mathjax-midline,
 .mathjax-block {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 
 /* Mermaid diagrams */
 .md-diagram-panel[lang="mermaid"],
 .md-diagram-panel-preview,
 [lang="mermaid"] svg {
-    color: var(--text-color);
-    background-color: transparent;
+  color: var(--text-color);
+  background-color: transparent;
 }
 
 [lang="mermaid"] .node rect,
@@ -189,8 +197,8 @@ code {
 [lang="mermaid"] .actor,
 [lang="mermaid"] .classGroup rect,
 [lang="mermaid"] .stateGroup rect {
-    fill: #161b22 !important;
-    stroke: var(--accent-color) !important;
+  fill: #161b22 !important;
+  stroke: var(--accent-color) !important;
 }
 
 [lang="mermaid"] text,
@@ -202,17 +210,17 @@ code {
 [lang="mermaid"] .labelText,
 [lang="mermaid"] .classText,
 [lang="mermaid"] .state-title {
-    color: var(--text-color) !important;
-    fill: var(--text-color) !important;
+  color: var(--text-color) !important;
+  fill: var(--text-color) !important;
 }
 
 [lang="mermaid"] .edgeLabel,
 [lang="mermaid"] .edgeLabel rect,
 [lang="mermaid"] .labelBox {
-    color: var(--text-color) !important;
-    fill: #0d1117 !important;
-    background-color: #0d1117 !important;
-    stroke: #30363d !important;
+  color: var(--text-color) !important;
+  fill: #0d1117 !important;
+  background-color: #0d1117 !important;
+  stroke: #30363d !important;
 }
 
 [lang="mermaid"] .flowchart-link,
@@ -223,13 +231,13 @@ code {
 [lang="mermaid"] .messageLine1,
 [lang="mermaid"] .actor-line,
 [lang="mermaid"] .loopLine {
-    stroke: var(--text-muted-color) !important;
+  stroke: var(--text-muted-color) !important;
 }
 
 [lang="mermaid"] marker path,
 [lang="mermaid"] .arrowheadPath {
-    fill: var(--text-muted-color) !important;
-    stroke: var(--text-muted-color) !important;
+  fill: var(--text-muted-color) !important;
+  stroke: var(--text-muted-color) !important;
 }
 
 [lang="mermaid"] .cluster rect,
@@ -237,8 +245,8 @@ code {
 [lang="mermaid"] .activation0,
 [lang="mermaid"] .activation1,
 [lang="mermaid"] .activation2 {
-    fill: #21262d !important;
-    stroke: #484f58 !important;
+  fill: #21262d !important;
+  stroke: #484f58 !important;
 }
 
 [lang="mermaid"] .task,
@@ -246,8 +254,8 @@ code {
 [lang="mermaid"] .task1,
 [lang="mermaid"] .task2,
 [lang="mermaid"] .task3 {
-    fill: #315f8a !important;
-    stroke: var(--accent-color) !important;
+  fill: #315f8a !important;
+  stroke: var(--accent-color) !important;
 }
 
 [lang="mermaid"] .section,
@@ -255,24 +263,24 @@ code {
 [lang="mermaid"] .section1,
 [lang="mermaid"] .section2,
 [lang="mermaid"] .section3 {
-    fill: #21262d !important;
-    stroke: #30363d !important;
+  fill: #21262d !important;
+  stroke: #30363d !important;
 }
 
 mark {
-    color: var(--text-strong-color);
-    background-color: rgba(158, 112, 25, 0.38);
+  color: var(--text-strong-color);
+  background-color: rgba(158, 112, 25, 0.38);
 }
 
 sup.md-footnote {
-    color: var(--accent-hover-color);
-    background-color: rgba(120, 167, 209, 0.14);
+  color: var(--accent-hover-color);
+  background-color: rgba(120, 167, 209, 0.14);
 }
 
 kbd {
-    color: var(--text-color);
-    background-color: #21262d;
-    border-color: #30363d;
+  color: var(--text-color);
+  background-color: #21262d;
+  border-color: #30363d;
 }
 
 input,
@@ -281,10 +289,10 @@ select,
 button,
 .btn,
 .form-control {
-    color: var(--text-color);
-    background-color: #0d1117;
-    border-color: #30363d;
-    font-weight: 500;
+  color: var(--text-color);
+  background-color: #0d1117;
+  border-color: #30363d;
+  font-weight: 500;
 }
 
 input:focus,
@@ -293,19 +301,19 @@ select:focus,
 button:focus,
 .btn:focus,
 .form-control:focus {
-    border-color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 .md-task-list-item > input::before {
-    background-color: #0d1117;
-    border-color: var(--text-muted-color);
+  background-color: #0d1117;
+  border-color: var(--text-muted-color);
 }
 
 .md-task-list-item > input:checked::before,
 .md-task-list-item > input[checked]::before {
-    color: var(--text-strong-color);
-    background-color: #315f8a;
-    border-color: #527fa8;
+  color: var(--text-strong-color);
+  background-color: #315f8a;
+  border-color: #527fa8;
 }
 
 /* Editor and source-mode colors */
@@ -313,7 +321,7 @@ button:focus,
 #typora-source .CodeMirror-scroll,
 #typora-source .CodeMirror-sizer,
 .cm-s-typora-default.CodeMirror {
-    background-color: #0d1117;
+  background-color: #0d1117;
 }
 
 /* Code-fence internals inherit the fence surface instead of drawing black rows. */
@@ -325,38 +333,38 @@ button:focus,
 .md-fences .CodeMirror-code,
 .md-fences .CodeMirror-line,
 .md-fences pre {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .CodeMirror-gutters {
-    border-right-color: #21262d;
+  border-right-color: #21262d;
 }
 
 .CodeMirror-linenumber,
 .CodeMirror-guttermarker-subtle {
-    color: #6e7681;
+  color: #6e7681;
 }
 
 .CodeMirror div.CodeMirror-cursor,
 .CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
-    border-left-color: var(--text-strong-color);
+  border-left-color: var(--text-strong-color);
 }
 
 .CodeMirror-selected,
 .cm-s-typora-default .CodeMirror-selected {
-    color: var(--text-strong-color) !important;
-    background-color: var(--select-text-bg-color) !important;
+  color: var(--text-strong-color) !important;
+  background-color: var(--select-text-bg-color) !important;
 }
 
 /* Keep only the CodeMirror selection layer, without a second text background. */
 .CodeMirror-selectedtext {
-    color: var(--text-strong-color) !important;
-    background-color: transparent !important;
+  color: var(--text-strong-color) !important;
+  background-color: transparent !important;
 }
 
 .CodeMirror-activeline-background,
 .cm-s-typora-default .CodeMirror-activeline-background {
-    background-color: rgba(110, 118, 129, 0.12);
+  background-color: rgba(110, 118, 129, 0.12);
 }
 
 .cm-s-inner .cm-variable,
@@ -368,13 +376,13 @@ button:focus,
 .cm-s-inner .cm-qualifier,
 .cm-s-typora-default .cm-variable,
 .cm-s-typora-default .cm-property {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 
 .cm-s-inner .cm-comment,
 .cm-s-inner.cm-comment,
 .cm-s-typora-default .cm-comment {
-    color: var(--text-muted-color);
+  color: var(--text-muted-color);
 }
 
 .cm-s-inner .cm-keyword,
@@ -384,27 +392,27 @@ button:focus,
 .cm-s-inner .cm-builtin,
 .cm-s-typora-default .cm-atom,
 .cm-s-typora-default .cm-number {
-    color: #d88b85;
+  color: #d88b85;
 }
 
 .cm-s-inner .cm-string,
 .cm-s-inner .cm-string-2,
 .cm-s-typora-default .cm-string {
-    color: #9ebdd5;
+  color: #9ebdd5;
 }
 
 .cm-s-inner .cm-tag,
 .cm-s-inner .cm-positive,
 .cm-s-inner .cm-quote,
 .cm-s-inner.cm-quote {
-    color: #8fba91;
+  color: #8fba91;
 }
 
 .cm-s-inner .cm-def,
 .cm-s-inner.cm-def,
 .cm-s-inner .cm-attribute,
 .cm-s-inner .cm-meta {
-    color: #b6a0cb;
+  color: #b6a0cb;
 }
 
 .cm-s-inner .cm-header,
@@ -412,90 +420,98 @@ button:focus,
 .cm-s-inner .cm-link,
 .cm-s-typora-default .cm-header,
 .cm-s-typora-default .cm-link {
-    color: var(--accent-hover-color);
+  color: var(--accent-hover-color);
 }
 
 .cm-s-inner .cm-negative,
 .cm-s-inner .cm-error {
-    color: #dca09a;
+  color: #dca09a;
 }
 
 .cm-s-inner .cm-hr {
-    color: #484f58;
+  color: #484f58;
 }
 
 /* Sidebar, file tree and outline */
 #typora-sidebar,
 .sidebar-content,
 .sidebar-footer {
-    color: var(--text-muted-color);
-    background-color: var(--side-bar-bg-color);
-    border-color: #21262d;
+  color: var(--text-muted-color);
+  background-color: var(--side-bar-bg-color);
+  border-color: #21262d;
 }
 
 .mac-seamless-mode #typora-sidebar {
-    background-color: var(--side-bar-bg-color);
+  background-color: var(--side-bar-bg-color);
 }
 
 .sidebar-tabs,
 .sidebar-tabs-content {
-    color: var(--text-muted-color);
-    border-color: #21262d;
+  color: var(--text-muted-color);
+  border-color: #21262d;
 }
 
 .sidebar-tab.active,
 .file-list-item.active,
 .file-tree-node.active > .file-node-content {
-    color: var(--active-file-text-color);
-    background-color: var(--active-file-bg-color);
+  color: var(--active-file-text-color);
+  background-color: var(--active-file-bg-color);
 }
 
 .file-list-item:hover,
 .file-node-content:hover,
 .outline-item:hover {
-    color: var(--item-hover-text-color);
-    background-color: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+  background-color: var(--item-hover-bg-color);
 }
 
 /* Dark, restrained selection treatment for documents in File List view. */
 #file-library-list-children .file-list-item.active {
-    color: var(--text-strong-color) !important;
-    background-color: #111d2b !important;
-    box-shadow: inset 2px 0 0 #527fa8;
-    transition: color 0.12s ease, background-color 0.12s ease;
+  color: var(--text-strong-color) !important;
+  background-color: #111d2b !important;
+  box-shadow: inset 2px 0 0 #527fa8;
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease;
 }
 
 #file-library-list-children .file-list-item.active:hover,
 #file-library-list-children .file-list-item.active:focus {
-    color: var(--text-strong-color) !important;
-    background-color: #142337 !important;
-    outline: 0;
+  color: var(--text-strong-color) !important;
+  background-color: #142337 !important;
+  outline: 0;
 }
 
 #file-library-list-children .file-list-item.active .file-list-item-file-name {
-    color: #d8dee6 !important;
-    font-weight: 600;
+  color: #d8dee6 !important;
+  font-weight: 600;
 }
 
 #file-library-list-children .file-list-item.active .file-list-item-parent-loc,
 #file-library-list-children .file-list-item.active .file-list-item-time,
 #file-library-list-children .file-list-item.active .file-list-item-summary {
-    color: #8b949e !important;
-    opacity: 1;
+  color: #8b949e !important;
+  opacity: 1;
 }
 
 #outline-content .outline-item-active,
 #outline-content .outline-item-active .outline-label,
 #outline-content .outline-item-wrapper.outline-item-active > .outline-item,
-#outline-content .outline-item-wrapper.outline-item-active > .outline-item .outline-label,
-#outline-content .outline-item-wrapper.outline-item-active > .outline-item .outline-expander {
-    color: var(--text-strong-color) !important;
+#outline-content
+  .outline-item-wrapper.outline-item-active
+  > .outline-item
+  .outline-label,
+#outline-content
+  .outline-item-wrapper.outline-item-active
+  > .outline-item
+  .outline-expander {
+  color: var(--text-strong-color) !important;
 }
 
 .file-node-icon,
 .file-node-open-state,
 .outline-expander {
-    color: var(--text-muted-color);
+  color: var(--text-muted-color);
 }
 
 /*
@@ -503,8 +519,8 @@ button:focus,
  * all ::-webkit-scrollbar-* styling when either property is non-auto.
  */
 * {
-    scrollbar-color: auto !important;
-    scrollbar-width: auto !important;
+  scrollbar-color: auto !important;
+  scrollbar-width: auto !important;
 }
 
 ::-webkit-scrollbar,
@@ -512,12 +528,12 @@ button:focus,
 ::-webkit-scrollbar-track-piece,
 ::-webkit-scrollbar-thumb,
 ::-webkit-scrollbar-corner {
-    -webkit-border-radius: 0 !important;
-    border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #282e35 !important;
+  background-color: #282e35 !important;
 }
 
 ::-webkit-scrollbar-button,
@@ -526,96 +542,96 @@ button:focus,
 ::-webkit-scrollbar-button:vertical,
 ::-webkit-scrollbar-button:start,
 ::-webkit-scrollbar-button:end {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #343b44 !important;
+  background-color: #343b44 !important;
 }
 
 ::-webkit-scrollbar-thumb:active {
-    background-color: #414a55 !important;
+  background-color: #414a55 !important;
 }
 
 /* Quick Open, search and transient panels */
 #typora-quick-open,
 .auto-suggest-container {
-    color: var(--text-color);
-    background-color: #161b22;
-    border-color: #30363d;
+  color: var(--text-color);
+  background-color: #161b22;
+  border-color: #30363d;
 }
 
 #typora-quick-open input {
-    color: var(--text-strong-color);
-    background-color: #0d1117;
-    border-color: #30363d;
+  color: var(--text-strong-color);
+  background-color: #0d1117;
+  border-color: #30363d;
 }
 
 #typora-quick-open-item,
 .typora-quick-open-item {
-    color: var(--text-color);
-    background-color: #161b22;
-    border-color: #21262d #30363d #30363d #21262d;
+  color: var(--text-color);
+  background-color: #161b22;
+  border-color: #21262d #30363d #30363d #21262d;
 }
 
 .typora-quick-open-item.active,
 .typora-quick-open-item:hover {
-    color: var(--text-strong-color);
-    background-color: #315f8a;
+  color: var(--text-strong-color);
+  background-color: #315f8a;
 }
 
 .md-search-hit,
 .md-search-select,
 .searchpanel-search-option-btn.active {
-    color: var(--text-strong-color);
-    background-color: rgba(174, 126, 35, 0.35);
+  color: var(--text-strong-color);
+  background-color: rgba(174, 126, 35, 0.35);
 }
 
 .searchpanel-search-option-btn,
 .searchpanel-search-option-btn:hover {
-    color: var(--text-color);
-    background-color: #21262d;
-    border-color: #30363d;
+  color: var(--text-color);
+  background-color: #21262d;
+  border-color: #30363d;
 }
 
 /* Windows application chrome */
 footer,
 .ty-editor-toolbar,
 .ty-editor-toolbar-menu {
-    color: var(--text-color);
-    background-color: var(--surface-overlay);
-    border-color: var(--border-color);
+  color: var(--text-color);
+  background-color: var(--surface-overlay);
+  border-color: var(--border-color);
 }
 
 /* Merge the Windows caption into the editor canvas. */
 header,
 #top-titlebar {
-    color: var(--text-color);
-    background-color: var(--bg-color) !important;
-    background-image: none !important;
-    border-color: transparent !important;
+  color: var(--text-color);
+  background-color: var(--bg-color) !important;
+  background-image: none !important;
+  border-color: transparent !important;
 }
 
 .os-windows #top-titlebar,
 .unibody-window #top-titlebar {
-    background-image: none !important;
-    border: 0 !important;
-    box-shadow: none !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 .os-windows.paint-border header,
 .unibody-window.paint-border header {
-    border: 0 !important;
-    box-shadow: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 #top-titlebar,
 #top-titlebar .title-text,
 #top-titlebar .toolbar-icon,
 #top-titlebar .ty-icon {
-    color: var(--text-muted-color) !important;
+  color: var(--text-muted-color) !important;
 }
 
 /* Generic button styles must not draw boxes around Windows caption controls. */
@@ -625,13 +641,13 @@ header,
 #w-traffic-lights .toolbar-icon.btn:focus,
 #w-traffic-lights .toolbar-icon.btn:active,
 #w-top-margin {
-    background-color: transparent !important;
-    background-image: none !important;
-    border: 0 !important;
-    border-color: transparent !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    outline: 0 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
 }
 
 #top-titlebar .toolbar-icon.btn.hover,
@@ -640,37 +656,37 @@ header,
 #w-max-group.mouse-hover,
 #w-full.mouse-hover,
 #w-pin.mouse-hover {
-    color: var(--text-bold-color) !important;
-    background-color: var(--surface-raised) !important;
+  color: var(--text-bold-color) !important;
+  background-color: var(--surface-raised) !important;
 }
 
 #top-titlebar #w-close:hover {
-    color: #ffffff !important;
-    background-color: #c42b1c !important;
+  color: #ffffff !important;
+  background-color: #c42b1c !important;
 }
 
 #w-unpin {
-    color: #ffffff !important;
-    background-color: #315f8a !important;
+  color: #ffffff !important;
+  background-color: #315f8a !important;
 }
 
 .paint-border content {
-    border-color: var(--border-color) !important;
+  border-color: var(--border-color) !important;
 }
 
 /* The menu overlays the title bar on Windows; hide both underlying top edges. */
 .megamenu-opened #top-titlebar {
-    border-bottom-color: transparent !important;
-    box-shadow: none !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .paint-border .megamenu-content {
-    border-color: var(--border-color) !important;
-    border-top: 0 !important;
+  border-color: var(--border-color) !important;
+  border-top: 0 !important;
 }
 
 footer.ty-footer {
-    border-top-color: transparent !important;
+  border-top-color: transparent !important;
 }
 
 #footer-word-count:hover,
@@ -678,8 +694,8 @@ footer.ty-footer {
 .ty-show-word-count #footer-word-count,
 .sidebar-footer-item:hover,
 .footer-item:hover {
-    color: var(--text-strong-color) !important;
-    background-color: var(--surface-raised) !important;
+  color: var(--text-strong-color) !important;
+  background-color: var(--surface-raised) !important;
 }
 
 /* Context menus, dropdowns, spellcheck and word-count panels */
@@ -690,10 +706,10 @@ footer.ty-footer {
 #footer-word-count-info,
 #sidebar-files-menu,
 #toc-dropmenu {
-    color: var(--text-color) !important;
-    background: var(--surface-overlay) !important;
-    border: 1px solid var(--border-color) !important;
-    box-shadow: 0 8px 24px rgba(1, 4, 9, 0.55) !important;
+  color: var(--text-color) !important;
+  background: var(--surface-overlay) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 8px 24px rgba(1, 4, 9, 0.55) !important;
 }
 
 .context-menu > li > a,
@@ -701,8 +717,8 @@ footer.ty-footer {
 .dropdown-menu > li > a,
 .dropdown-menu .menu-item-container,
 .dropdown-menu .menu-style-btn {
-    color: var(--text-color) !important;
-    background-color: transparent;
+  color: var(--text-color) !important;
+  background-color: transparent;
 }
 
 .context-menu > li > a:hover,
@@ -717,8 +733,8 @@ footer.ty-footer {
 .menu-style-btn.active,
 .ty-spell-check-panel-item.ty-active,
 .ty-spell-check-panel-item:hover {
-    color: var(--text-strong-color) !important;
-    background-color: var(--surface-raised) !important;
+  color: var(--text-strong-color) !important;
+  background-color: var(--surface-raised) !important;
 }
 
 .context-menu .disabled,
@@ -727,77 +743,77 @@ footer.ty-footer {
 .dropdown-menu .disabled a,
 .menu-style-btn.disabled,
 .menu-style-btn.disabled:hover {
-    color: #6e7681 !important;
-    background-color: transparent !important;
+  color: #6e7681 !important;
+  background-color: transparent !important;
 }
 
 .dropdown-menu .divider,
 .context-menu.dropdown-menu .divider,
 .menuitem-group-label {
-    color: var(--text-muted-color) !important;
-    background-color: transparent !important;
-    border-color: var(--border-color) !important;
+  color: var(--text-muted-color) !important;
+  background-color: transparent !important;
+  border-color: var(--border-color) !important;
 }
 
 /* Windows menu page */
 .megamenu-content {
-    color: var(--text-color) !important;
-    background-color: var(--bg-color) !important;
-    background-image: none !important;
-    border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+  background-color: var(--bg-color) !important;
+  background-image: none !important;
+  border-color: var(--border-color) !important;
 }
 
 .megamenu-menu-section,
 .megamenu-menu-panel,
 #recent-file-panel,
 #recent-file-pane {
-    color: var(--text-color) !important;
-    background: transparent !important;
+  color: var(--text-color) !important;
+  background: transparent !important;
 }
 
 #megamenu-menu-sidebar,
 .megamenu-menu {
-    color: var(--text-color) !important;
-    background: var(--surface-overlay) !important;
-    border-right: 1px solid var(--border-color) !important;
-    box-shadow: 2px 0 12px rgba(1, 4, 9, 0.45) !important;
+  color: var(--text-color) !important;
+  background: var(--surface-overlay) !important;
+  border-right: 1px solid var(--border-color) !important;
+  box-shadow: 2px 0 12px rgba(1, 4, 9, 0.45) !important;
 }
 
 .megamenu-menu-header {
-    color: var(--text-color) !important;
-    background: var(--surface-raised) !important;
-    border-bottom-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+  background: var(--surface-raised) !important;
+  border-bottom-color: var(--border-color) !important;
 }
 
 #megamenu-back-btn,
 #megamenu-menu-header-title,
 .megamenu-menu-header #megamenu-menu-header-title,
 .megamenu-menu-header #megamenu-menu-header-title::before {
-    color: var(--text-strong-color) !important;
-    border-color: var(--text-muted-color) !important;
+  color: var(--text-strong-color) !important;
+  border-color: var(--text-muted-color) !important;
 }
 
 #megamenu-menu-list,
 .megamenu-menu-list.dropdown-menu {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 #megamenu-menu-list li,
 #megamenu-menu-list li:hover {
-    background: transparent !important;
+  background: transparent !important;
 }
 
 #megamenu-menu-list li a {
-    color: var(--text-color) !important;
-    background: transparent !important;
+  color: var(--text-color) !important;
+  background: transparent !important;
 }
 
 #megamenu-menu-list li a.active,
 #megamenu-menu-list li a:hover {
-    color: var(--text-bold-color) !important;
-    background-color: var(--surface-active) !important;
+  color: var(--text-bold-color) !important;
+  background-color: var(--surface-active) !important;
 }
 
 .megamenu-menu-panel h1,
@@ -806,54 +822,54 @@ footer.ty-footer {
 .megamenu-menu-panel table th,
 .recent-file-item,
 .recent-file-name {
-    color: var(--text-color) !important;
+  color: var(--text-color) !important;
 }
 
 .megamenu-menu-panel h1,
 .megamenu-menu-panel h2 {
-    border-color: transparent !important;
+  border-color: transparent !important;
 }
 
 #recent-file-panel tbody tr,
 #recent-file-panel tbody tr:nth-child(2n),
 #recent-file-panel tbody tr:nth-child(2n-1),
 .megamenu-menu-panel table tr {
-    color: var(--text-color) !important;
-    background: transparent !important;
-    border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+  background: transparent !important;
+  border-color: var(--border-color) !important;
 }
 
 #recent-file-panel tbody tr:hover,
 .megamenu-menu-panel tbody tr:hover,
 .recent-file-item:hover {
-    color: var(--text-strong-color) !important;
-    background-color: var(--surface-raised) !important;
+  color: var(--text-strong-color) !important;
+  background-color: var(--surface-raised) !important;
 }
 
 .megamenu-menu-panel .btn,
 .long-btn,
 #recent-file-panel-action-btn {
-    color: var(--text-color) !important;
-    background: var(--surface-overlay) !important;
-    border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+  background: var(--surface-overlay) !important;
+  border-color: var(--border-color) !important;
 }
 
 .megamenu-menu-panel .btn:hover,
 .long-btn:hover,
 #recent-file-panel-action-btn:hover {
-    color: var(--text-bold-color) !important;
-    background: var(--surface-raised) !important;
-    border-color: #484f58 !important;
+  color: var(--text-bold-color) !important;
+  background: var(--surface-raised) !important;
+  border-color: #484f58 !important;
 }
 
 .theme-preview-div {
-    background-color: var(--surface-overlay) !important;
-    border-color: var(--border-color) !important;
+  background-color: var(--surface-overlay) !important;
+  border-color: var(--border-color) !important;
 }
 
 .theme-preview-div.active,
 .theme-preview-div:hover {
-    border-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
 }
 
 /* Dialogs, notifications, tooltips and floating editor controls */
@@ -866,41 +882,41 @@ footer.ty-footer {
 .ty-editor-toolbar,
 .ty-editor-toolbar-menu,
 .ty-editor-toolbar-tooltip {
-    color: var(--text-color) !important;
-    background: var(--surface-overlay) !important;
-    border-color: var(--border-color) !important;
-    box-shadow: 0 12px 32px rgba(1, 4, 9, 0.5);
+  color: var(--text-color) !important;
+  background: var(--surface-overlay) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 12px 32px rgba(1, 4, 9, 0.5);
 }
 
 .modal-header,
 .modal-footer,
 .popover-title {
-    border-color: var(--border-color) !important;
+  border-color: var(--border-color) !important;
 }
 
 .modal-backdrop,
 .modal-backdrop.in {
-    background-color: rgba(1, 4, 9, 0.72) !important;
-    opacity: 1;
+  background-color: rgba(1, 4, 9, 0.72) !important;
+  opacity: 1;
 }
 
 .modal-content .close,
 #md-notification .btn {
-    color: var(--accent-color) !important;
-    background-color: transparent !important;
+  color: var(--accent-color) !important;
+  background-color: transparent !important;
 }
 
 .ty-editor-toolbar-divider,
 .ty-editor-toolbar-menu-divider {
-    background-color: var(--border-color) !important;
+  background-color: var(--border-color) !important;
 }
 
 .ty-editor-toolbar-btn:hover,
 .ty-editor-toolbar-btn.active,
 .ty-editor-toolbar-menu-item:hover,
 .ty-editor-toolbar-menu-item.active {
-    color: var(--text-strong-color) !important;
-    background-color: var(--surface-raised) !important;
+  color: var(--text-strong-color) !important;
+  background-color: var(--surface-raised) !important;
 }
 
 /* Preferences and export pages (loaded in a separate Windows webview). */
@@ -909,22 +925,22 @@ footer.ty-footer {
 .ty-preferences .window-content,
 .ty-preferences .pane,
 .ty-preferences .pane-group {
-    color: var(--text-color) !important;
-    background: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  background: var(--bg-color) !important;
 }
 
 .ty-preferences .sidebar,
 .ty-preferences .window-header {
-    color: var(--text-color) !important;
-    background: var(--surface-overlay) !important;
-    border-color: var(--border-color) !important;
-    box-shadow: 0 1px 0 var(--border-color) !important;
+  color: var(--text-color) !important;
+  background: var(--surface-overlay) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 1px 0 var(--border-color) !important;
 }
 
 .ty-preferences .nav-group-item,
 .ty-preferences .list-group-item {
-    color: var(--text-muted-color) !important;
-    background-color: transparent;
+  color: var(--text-muted-color) !important;
+  background-color: transparent;
 }
 
 .ty-preferences .nav-group-item:hover,
@@ -933,8 +949,8 @@ footer.ty-footer {
 .ty-preferences .list-group-item:hover,
 .ty-preferences .list-group-item.active,
 .ty-preferences .list-group-item.selected {
-    color: var(--text-strong-color) !important;
-    background-color: var(--surface-active) !important;
+  color: var(--text-strong-color) !important;
+  background-color: var(--surface-active) !important;
 }
 
 .ty-preferences input:not([type="range"]):not([type="color"]),
@@ -942,46 +958,46 @@ footer.ty-footer {
 .ty-preferences select,
 .ty-preferences .form-control,
 .ty-preferences .input-autocomplete {
-    color: var(--text-color) !important;
-    background: var(--bg-color) !important;
-    border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+  background: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
 }
 
 .ty-preferences option,
 .ty-preferences optgroup {
-    color: var(--text-color);
-    background-color: var(--surface-overlay);
+  color: var(--text-color);
+  background-color: var(--surface-overlay);
 }
 
 .ty-preferences input:focus,
 .ty-preferences textarea:focus,
 .ty-preferences select:focus {
-    border-color: var(--accent-color) !important;
-    box-shadow: 0 0 0 1px var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 0 1px var(--accent-color) !important;
 }
 
 .ty-preferences input[type="checkbox"],
 .ty-preferences input[type="radio"],
 .ty-preferences input[type="range"] {
-    accent-color: var(--accent-color);
+  accent-color: var(--accent-color);
 }
 
 .ty-preferences .btn,
 .ty-preferences .btn-default,
 .ty-preferences .btn-default:not(:hover) {
-    color: var(--text-color) !important;
-    background: var(--surface-overlay) !important;
-    border-color: var(--border-color) !important;
-    box-shadow: none !important;
+  color: var(--text-color) !important;
+  background: var(--surface-overlay) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: none !important;
 }
 
 .ty-preferences .btn:hover,
 .ty-preferences .btn:focus,
 .ty-preferences .btn-default:hover,
 .ty-preferences .btn-default:focus {
-    color: var(--text-bold-color) !important;
-    background: var(--surface-raised) !important;
-    border-color: #484f58 !important;
+  color: var(--text-bold-color) !important;
+  background: var(--surface-raised) !important;
+  border-color: #484f58 !important;
 }
 
 .ty-preferences .export-detail,
@@ -990,106 +1006,498 @@ footer.ty-footer {
 .ty-preferences.light .export-detail,
 .ty-preferences.light .export-items-list-control,
 .ty-preferences.light .export-item.active {
-    color: var(--text-strong-color) !important;
-    background: var(--surface-active) !important;
-    border-color: var(--border-color) !important;
+  color: var(--text-strong-color) !important;
+  background: var(--surface-active) !important;
+  border-color: var(--border-color) !important;
 }
 
 .ty-preferences .export-item:hover:not(.active),
 .ty-preferences .input-autocomplete-row:hover,
 .ty-preferences .input-autocomplete-row.active,
 .ty-preferences .dropdown-menu li:hover {
-    color: var(--text-strong-color) !important;
-    background: var(--surface-raised) !important;
+  color: var(--text-strong-color) !important;
+  background: var(--surface-raised) !important;
 }
 
 .ty-preferences .modal-title,
 .ty-preferences .modal-footer,
 .ty-preferences .separator,
 .ty-preferences hr {
-    border-color: var(--border-color) !important;
+  border-color: var(--border-color) !important;
 }
 
 /* Source-mode exit control: replace Typora's built-in light active surface. */
 .typora-sourceview-on #toggle-sourceview-btn {
-    color: var(--text-strong-color) !important;
-    background-color: #21262d !important;
+  color: var(--text-strong-color) !important;
+  background-color: #21262d !important;
 }
 
 .typora-sourceview-on #toggle-sourceview-btn:hover {
-    color: var(--text-bold-color) !important;
-    background-color: #30363d !important;
+  color: var(--text-bold-color) !important;
+  background-color: #30363d !important;
 }
 
 /* Compact, flat toolbar groups inside the context menu. */
 .menu-item-container {
-    display: flex !important;
-    align-items: center;
-    gap: 2px;
-    margin: 1px 6px;
-    padding: 3px 4px !important;
-    background-color: rgba(110, 118, 129, 0.08) !important;
-    border-radius: 6px;
+  display: flex !important;
+  align-items: center;
+  gap: 2px;
+  margin: 1px 6px;
+  padding: 3px 4px !important;
+  background-color: rgba(110, 118, 129, 0.08) !important;
+  border-radius: 6px;
 }
 
 .menu-item-container a.menu-style-btn,
 .menu-item-container a.menu-style-btn-2width {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    flex: 1 1 0;
-    width: auto !important;
-    min-width: 0;
-    height: 26px;
-    margin: 0 !important;
-    padding: 0 !important;
-    color: var(--text-muted-color) !important;
-    background: transparent !important;
-    border: 0 !important;
-    border-radius: 4px !important;
-    box-shadow: none !important;
-    transition: color 0.1s ease, background-color 0.1s ease;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  width: auto !important;
+  min-width: 0;
+  height: 26px;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--text-muted-color) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  transition:
+    color 0.1s ease,
+    background-color 0.1s ease;
 }
 
 .menu-item-container a.menu-style-btn .ty-icon {
-    margin: 0 !important;
-    font-size: 14px;
-    line-height: 1;
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .menu-item-container a.menu-style-btn:hover,
 .menu-item-container a.menu-style-btn:focus {
-    color: var(--text-strong-color) !important;
-    background-color: var(--surface-raised) !important;
-    outline: 0 !important;
+  color: var(--text-strong-color) !important;
+  background-color: var(--surface-raised) !important;
+  outline: 0 !important;
 }
 
 .menu-item-container a.menu-style-btn.active {
-    color: var(--accent-hover-color) !important;
-    background-color: rgba(120, 167, 209, 0.16) !important;
+  color: var(--accent-hover-color) !important;
+  background-color: rgba(120, 167, 209, 0.16) !important;
 }
 
 .menu-item-container a.menu-style-btn.disabled,
 .menu-item-container a.menu-style-btn.disabled:hover {
-    color: #6e7681 !important;
-    background-color: transparent !important;
-    opacity: 0.4;
+  color: #6e7681 !important;
+  background-color: transparent !important;
+  opacity: 0.4;
 }
 
 #md-notification .btn {
-    color: var(--accent-color);
-    background-color: transparent;
+  color: var(--accent-color);
+  background-color: transparent;
 }
 
 .ty-table-edit,
 .md-rawblock-tooltip,
 .md-rawblock-control,
 .md-rawblock-panel {
-    color: var(--text-color);
-    background-color: #161b22;
-    border-color: #30363d;
+  color: var(--text-color);
+  background-color: #161b22;
+  border-color: #30363d;
 }
 
 .mac-os #write {
-    caret-color: var(--accent-color);
+  caret-color: var(--accent-color);
+}
+
+/* ==========================================================================
+   github-pro 功能层（叠加在 github-dark.css 之上）
+   ========================================================================== */
+
+/* 字体统一：与浅色主题一致，适配 Windows11 中文 */
+body {
+  font-family:
+    -apple-system, "Segoe UI", "Microsoft YaHei", "PingFang SC",
+    "Hiragino Sans GB", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+/* 写作区背景确保为深色 */
+#write,
+content {
+  background-color: var(--bg-color);
+}
+
+/* 光标颜色：黑夜下黑色光标看不见，改为主题蓝 */
+#write,
+#typora-source .CodeMirror {
+  caret-color: var(--accent-color);
+}
+
+/* 标题自动编号（h1–h6）：用 CSS counter；删除此段可关闭 */
+/* #write {
+    counter-reset: gp-h1;
+}
+#write h1 { counter-increment: gp-h1; counter-reset: gp-h2 gp-h3 gp-h4 gp-h5 gp-h6; }
+#write h2 { counter-increment: gp-h2; counter-reset: gp-h3 gp-h4 gp-h5 gp-h6; }
+#write h3 { counter-increment: gp-h3; counter-reset: gp-h4 gp-h5 gp-h6; }
+#write h4 { counter-increment: gp-h4; counter-reset: gp-h5 gp-h6; }
+#write h5 { counter-increment: gp-h5; counter-reset: gp-h6; }
+#write h6 { counter-increment: gp-h6; }
+#write h1::before {
+    content: counter(gp-h1) " ";
+    color: var(--text-muted-color);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h2::before {
+    content: counter(gp-h1) "." counter(gp-h2) " ";
+    color: var(--text-muted-color);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h3::before {
+    content: counter(gp-h1) "." counter(gp-h2) "." counter(gp-h3) " ";
+    color: var(--text-muted-color);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h4::before {
+    content: counter(gp-h1) "." counter(gp-h2) "." counter(gp-h3) "." counter(gp-h4) " ";
+    color: var(--text-muted-color);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h5::before {
+    content: counter(gp-h1) "." counter(gp-h2) "." counter(gp-h3) "." counter(gp-h4) "." counter(gp-h5) " ";
+    color: var(--text-muted-color);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+}
+#write h6::before {
+    content: counter(gp-h1) "." counter(gp-h2) "." counter(gp-h3) "." counter(gp-h4) "." counter(gp-h5) "." counter(gp-h6) " ";
+    color: var(--text-muted-color);
+    font-weight: 600;
+    margin-right: 0.4em;
+    user-select: none;
+} */
+
+/* 代码块：圆角 + mac 三色圆点 + 语言标签 */
+.md-fences {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 12px;
+  padding-top: 30px;
+  box-shadow: 0 1px 3px rgba(1, 4, 9, 0.5);
+}
+.md-fences::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow:
+    20px 0 0 #ffbd2e,
+    40px 0 0 #27c93f;
+}
+.code-tooltip .ty-cm-lang-input {
+  color: var(--text-muted-color);
+}
+/* 代码块行号分隔线更柔 */
+.md-fences .CodeMirror-gutters {
+  border-right-color: rgba(240, 246, 252, 0.14);
+}
+.CodeMirror-linenumber,
+.CodeMirror-guttermarker-subtle {
+  color: var(--text-muted-color);
+}
+
+/* 代码选中：整块与逐行统一为暗蓝，不再过亮（仅在“确实选中”时显示） */
+.md-fences .CodeMirror-selected,
+.md-fences .cm-selected,
+.md-fences .CodeMirror-line::selection,
+.md-fences .CodeMirror-line > span::selection,
+.md-fences ::selection {
+  background-color: rgb(47, 61, 100) !important;
+  color: var(--text-strong-color) !important;
+}
+.md-fences .CodeMirror-selectedtext {
+  background-color: transparent !important;
+}
+/* 未选中时不要出现光标行高亮背景（去默认底色） */
+.md-fences .CodeMirror-activeline-background,
+.md-fences .cm-activeline-background {
+  background-color: transparent !important;
+}
+
+/* YAML Front Matter 卡片化 */
+#write pre.md-meta-block {
+  position: relative;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 12px;
+  padding: 32px 1.2rem 1rem 1.2rem;
+  box-shadow: 0 1px 3px rgba(1, 4, 9, 0.5);
+}
+#write pre.md-meta-block::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow:
+    20px 0 0 #ffbd2e,
+    40px 0 0 #27c93f;
+}
+#write pre.md-meta-block::after {
+  content: "YAML";
+  position: absolute;
+  top: 9px;
+  right: 12px;
+  font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-size: 0.7em;
+  color: var(--text-muted-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 1px 6px;
+  background-color: var(--bg-color);
+}
+
+/* 文内 TOC 卡片 + 圆点 + 弹出工具条与 TOC 左对齐 */
+.md-toc {
+  position: relative;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: auto !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 12px;
+  background-color: var(--surface-overlay);
+  border: 1px solid var(--border-color);
+  padding: 30px 16px 12px 16px;
+  box-shadow: 0 1px 3px rgba(1, 4, 9, 0.5);
+}
+.md-toc::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow:
+    20px 0 0 #ffbd2e,
+    40px 0 0 #27c93f;
+}
+.md-toc-item a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+.md-toc-item a:hover {
+  color: var(--accent-hover-color);
+  text-decoration: underline;
+}
+.md-toc-content ul {
+  border-left: 1px solid var(--border-color);
+  padding-left: 16px;
+  margin-left: 4px;
+}
+/* 弹出的 TOC 工具条：与 TOC 框左对齐（修复“白条右移”） */
+.md-toc-tooltip {
+  left: 0 !important;
+  right: auto !important;
+}
+
+/* 表格卡化：四角圆角 + 斑马纹 + 行 hover，保持 border-collapse: separate */
+#write table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+#write table tr {
+  border: 0 !important;
+}
+#write table th,
+#write table td {
+  border: 0 !important;
+  border-top: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  padding: 8px 16px;
+}
+#write table thead th {
+  border-top: 0 !important;
+}
+#write table th:first-child,
+#write table td:first-child {
+  border-left: 0 !important;
+}
+#write table th:first-child {
+  border-top-left-radius: 10px;
+}
+#write table th:last-child {
+  border-top-right-radius: 10px;
+}
+#write table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+#write table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+#write table thead th {
+  background-color: var(--surface-overlay);
+}
+#write table tbody tr:nth-child(even) td {
+  background-color: rgba(110, 118, 129, 0.08);
+}
+#write table tbody tr:hover td {
+  background-color: rgba(110, 118, 129, 0.14);
+}
+
+/* 引用块卡片化 + 多级强调 */
+#write blockquote {
+  box-sizing: border-box;
+  background-color: var(--surface-overlay);
+  border-left: 4px solid var(--border-color);
+  border-radius: 6px;
+  padding: 10px 16px;
+}
+#write blockquote blockquote {
+  border-left-color: var(--accent-color);
+  background-color: rgba(110, 118, 129, 0.08);
+}
+
+/* 任务清单：仅被勾选那一项置灰+删除线，不波及子任务 */
+.md-task-list-item.task-list-done {
+  color: var(--text-muted-color);
+}
+.md-task-list-item.task-list-done > p,
+.md-task-list-item.task-list-done > .md-plain {
+  color: var(--text-muted-color);
+  text-decoration: line-through;
+}
+.md-task-list-item .md-task-list-item {
+  color: var(--text-color);
+  text-decoration: none;
+}
+.md-task-list-item .md-task-list-item.task-list-done > p,
+.md-task-list-item .md-task-list-item.task-list-done > .md-plain {
+  color: var(--text-muted-color);
+  text-decoration: line-through;
+}
+
+/* 文件树：同层级导航细线 */
+.file-node-children {
+  margin-left: 8px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(120, 167, 209, 0.28);
+}
+
+/* 黄底高亮内的行内 code 用深色，保证可读 */
+.md-search-hit,
+.md-search-hit code,
+.md-search-hit .md-plain,
+.md-search-hit .md-content {
+  color: #1f2328 !important;
+}
+.md-fences .cm-search-hit,
+.md-fences .cm-search-hit .cm-keyword,
+.md-fences .cm-search-hit .cm-comment,
+.md-fences .cm-search-hit .cm-string,
+.md-fences .cm-search-hit .cm-number,
+.md-fences .cm-search-hit .cm-operator,
+.md-fences .cm-search-hit .cm-tag,
+.md-fences .cm-search-hit .cm-attribute {
+  color: #1f2328 !important;
+}
+
+/* 行内代码：未选中与“被选中（光标进入，wrapper 加 .md-expand）”两种配色。
+   未选中背景 rgb(22,27,34)、选中背景 rgb(47,61,100)；文字均为 rgb(184,192,204) */
+#write span.md-pair-s code {
+  background-color: rgb(22, 27, 34);
+  color: rgb(184, 192, 204);
+}
+#write span.md-pair-s.md-expand code {
+  background-color: rgb(47, 61, 100);
+  color: rgb(184, 192, 204);
+}
+
+/* 窗口布局：侧边栏与编辑区圆角 + 中间留一点缝（浮动卡片感）。
+   注意：属布局改动，若侧栏拖宽/折叠异常，请告知窗口级 DOM 再微调。 */
+#typora-sidebar {
+  border-radius: 0 10px 10px 0;
+  margin-right: 10px;
+}
+content,
+#write {
+  border-radius: 10px;
+}
+
+/* 打印 / PDF 导出：强制白底黑字、去阴影、防断页 */
+@media print {
+  :root {
+    color-scheme: light;
+  }
+  html,
+  body,
+  #write,
+  content {
+    background-color: #ffffff !important;
+    color: #24292f !important;
+  }
+  .md-fences,
+  blockquote,
+  #write pre.md-meta-block,
+  .md-toc,
+  table {
+    box-shadow: none !important;
+  }
+  .md-fences,
+  .md-toc,
+  #write pre.md-meta-block,
+  blockquote {
+    background-color: #f6f8fa !important;
+  }
+  .md-fences::before,
+  #write pre.md-meta-block::before,
+  .md-toc::before {
+    content: none !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+  pre,
+  .md-fences,
+  table,
+  .md-image,
+  blockquote {
+    break-inside: avoid;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+}
+@page {
+  margin: 18mm 16mm;
 }
