@@ -3029,3 +3029,51 @@ body.typora-export {
 #write pre.md-fences::before {
   margin: 0 0 0 18px;
 }
+
+/*修改TOC占位错误*/
+#write .md-toc {
+  position: relative;
+} /* 卡片作为定位基准 */
+#write .md-toc .md-toc-content {
+  margin: 0;
+  min-height: 1.4em;
+} /* 防塌陷+去掉段落外边距 */
+#write .md-toc .md-toc-content::before,
+#write .md-toc .md-toc-content::after {
+  /* 把 Typora 占位伪元素拉回卡片内 */
+  position: static !important;
+  float: none !important;
+  display: inline;
+  font-size: 1em;
+}
+
+/* ===== 修复空 YAML frontmatter 占位显示错乱（通用） ===== */
+/* 1) 隐藏 Typora 在空 YAML 上画错的占位伪元素 */
+
+/* #write pre.md-meta-block:empty::before,
+#write pre.md-meta-block:empty::after {
+  display: none !important;
+} */
+
+/* 2) 用自己的文字提示替代（挂在 ::after 上） */
+/* #write pre.md-meta-block:empty::after {
+  display: inline !important;
+  content: "YAML Front Matter";
+  color: #9aa5b1;
+  font-size: 85%;
+  position: static !important;
+  float: none !important;
+  white-space: normal;
+} */
+
+/* 3) 非空状态下伪元素也不许乱跑（只管 ::after，不动别的主题可能用到的 ::before） */
+/* #write pre.md-meta-block::after {
+  position: static !important;
+  float: none !important;
+  white-space: normal;
+} */
+
+/* 4) 空状态保住卡片高度，不塌陷 */
+/* #write pre.md-meta-block:empty {
+  min-height: 2.5em;
+} */

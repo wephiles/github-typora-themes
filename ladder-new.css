@@ -49,8 +49,14 @@
   --tw-prose-quote-borders: var(--theme-200);
   --tw-prose-captions: var(--theme-500);
   --tw-prose-code: var(--theme-900);
-  --tw-prose-pre-code: var(--theme-700); /* Ladder-Pro: 浅色代码块背景下，默认代码文字改为深色 */
-  --tw-prose-pre-bg: rgb(242, 242, 255); /* Ladder-Pro: 白天模式代码块浅色背景（想用纯白可改成 #fff） */
+  --tw-prose-pre-code: var(
+    --theme-700
+  ); /* Ladder-Pro: 浅色代码块背景下，默认代码文字改为深色 */
+  --tw-prose-pre-bg: rgb(
+    242,
+    242,
+    255
+  ); /* Ladder-Pro: 白天模式代码块浅色背景（想用纯白可改成 #fff） */
   --tw-prose-th-borders: var(--theme-300);
   --tw-prose-td-borders: var(--theme-200);
   --tw-prose-bg: var(--theme-0);
@@ -126,8 +132,9 @@
   --rawblock-edit-panel-bd: var(--tw-prose-pre-bg);
   --item-hover-bg-color-inverted: var(--theme-700);
 
-  --monospace: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  --monospace:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
   /* Custom */
   --footnote: var(--tw-prose-body);
@@ -726,7 +733,7 @@ blockquote {
   color: var(--tw-prose-quotes);
   border-left-width: 0.25rem;
   border-left-color: var(--tw-prose-quote-borders);
-  quotes: "\201C""\201D""\2018""\2019";
+  quotes: "\201C" "\201D" "\2018" "\2019";
   margin-top: 1.6em;
   margin-bottom: 1.6em;
   padding-left: 1.0666667em;
@@ -756,7 +763,8 @@ p {
   margin-bottom: 1.2em;
 }
 
-.in-text-selection,::selection {
+.in-text-selection,
+::selection {
   background-color: var(--select-text-bg-color);
 }
 
@@ -1233,4 +1241,21 @@ mark {
 
 .btn-default {
   background-color: var(--button-bg);
+}
+
+/*修改TOC占位错误*/
+#write .md-toc {
+  position: relative;
+} /* 卡片作为定位基准 */
+#write .md-toc .md-toc-content {
+  margin: 0;
+  min-height: 1.4em;
+} /* 防塌陷+去掉段落外边距 */
+#write .md-toc .md-toc-content::before,
+#write .md-toc .md-toc-content::after {
+  /* 把 Typora 占位伪元素拉回卡片内 */
+  position: static !important;
+  float: none !important;
+  display: inline;
+  font-size: 1em;
 }

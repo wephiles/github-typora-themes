@@ -450,3 +450,29 @@ footer {
     hsla(0, 0%, 100%, 0)
   );
 }
+/* ===== 修复空 YAML frontmatter 占位显示错乱（通用） ===== */
+/* 1) 隐藏 Typora 在空 YAML 上画错的占位伪元素 */
+#write pre.md-meta-block:empty::before,
+#write pre.md-meta-block:empty::after {
+  display: none !important;
+}
+/* 2) 用自己的文字提示替代（挂在 ::after 上） */
+#write pre.md-meta-block:empty::after {
+  display: inline !important;
+  content: "input YAML Front Matter here.";
+  color: #9aa5b1; /* 提示文字颜色，可按主题改 */
+  font-size: 85%;
+  position: static !important;
+  float: none !important;
+  white-space: normal;
+}
+/* 3) 非空状态下伪元素也不许乱跑（只管 ::after，不动别的主题可能用到的 ::before） */
+#write pre.md-meta-block::after {
+  position: static !important;
+  float: none !important;
+  white-space: normal;
+}
+/* 4) 空状态保住卡片高度，不塌陷 */
+#write pre.md-meta-block:empty {
+  min-height: 2.5em;
+}

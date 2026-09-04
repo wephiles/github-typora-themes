@@ -1,19 +1,73 @@
-/*代码块配置区域*/
-#write .CodeMirror-wrap .CodeMirror-code pre {
-  font-size: 16px;
-  font-family:
-    "Inconsolata", "Source Code Pro", "Consolas", "Microsoft YaHei", monospace;
+/* ==========================================================================
+   全局字体方案（github-pro-light / dark 两个主题通用）
+   --------------------------------------------------------------------------
+   目标：
+   · 正文编辑区：中文默认 宋体（SimSun），英文/数字默认 Source Code Pro；
+   · 代码块 / 行内代码：英文/数字默认 Source Code Pro，代码内中文可自定；
+   · 两类字体都可以由你在下面 :root 的变量里自行修改。
+
+   实现原理（CSS 字体回退机制）：
+   font-family 列表是“逐字符回退”的——浏览器为每个字符找第一个含有该字形的字体。
+   Source Code Pro 等西文字体不含汉字字形，因此：
+     · 英文/数字/半角标点 → 命中列表中的西文字体（Source Code Pro）；
+     · 汉字/全角标点     → 西文字体没有 → 自动回退到后面的中文字体（宋体）。
+   所以只要“西文在前、中文在后”写一行规则即可实现中英分字体，无需 JS。
+
+   注意：
+   · 若在 偏好设置→外观→字体 里另外设置了字体，可能与这里的规则打架，
+     以这里的为准（主题 CSS 优先级更高）；建议偏好设置里保持默认。
+   · 宋体没有粗体字形，加粗的中文由系统合成伪粗体，属正常现象。
+   ========================================================================== */
+:root {
+  /* ★ 正文：西文/数字字体（想换英文默认字体改这里） */
+  --user-font-body-latin:
+    "Source Code Pro", "Cascadia Code", "JetBrains Mono", Consolas;
+  /* ★ 正文：中文字体（默认宋体；想换中文默认字体改这里） */
+  --user-font-body-han:
+    "Microsoft YaHei", "宋体", "微软雅黑", "SimSun", "黑体", "NSimSun",
+    "Songti SC", "Noto Serif CJK SC", serif;
+
+  /* ★ 代码块/行内代码：西文/数字字体 */
+  --user-font-code-latin:
+    "Source Code Pro", "Cascadia Code", "JetBrains Mono", Consolas;
+  /* ★ 代码块/行内代码：代码里出现中文时的回退字体
+     （默认用微软雅黑，小字号下比宋体易读；想统一成宋体改成 "SimSun", "宋体"） */
+  --user-font-code-han:
+    "Microsoft YaHei", "宋体", "黑体", "微软雅黑", "PingFang SC", sans-serif;
 }
-.md-fences {
+
+/* --------------------------------------------------------------------------
+   正文编辑区（所见即所得 + 源代码模式）：
+   中文宋体、英文 Source Code Pro
+   -------------------------------------------------------------------------- */
+#write,
+#typora-source .CodeMirror-lines {
+  font-family: var(--user-font-body-latin), var(--user-font-body-han);
+}
+
+/* --------------------------------------------------------------------------
+   代码块 / 行内代码 / YAML 头 / 代码块内 CodeMirror：
+   英文 Source Code Pro，代码内中文回退 --user-font-code-han
+   -------------------------------------------------------------------------- */
+#write code,
+#write tt,
+#write .md-fences,
+#write .CodeMirror,
+#write .CodeMirror-wrap .CodeMirror-code pre,
+#write pre.md-meta-block {
   font-family:
-    "Inconsolata", "Source Code Pro", "Consolas", "Microsoft YaHei", monospace;
+    var(--user-font-code-latin), var(--user-font-code-han), monospace;
+}
+
+/* --------------------------------------------------------------------------
+   代码块配置区域（字号）
+   -------------------------------------------------------------------------- */
+#write .CodeMirror-wrap .CodeMirror-code pre {
+  font-size: 16px; /* 与正文同步 +1（原 16px），保持代码块与正文等大 */
 }
 
 /*行内代码配置区域*/
 #write code {
-  font-family:
-    "Inconsolata", "Source Code Pro", "Consolas", "JetBrains Mono", Consolas,
-    monospace;
   font-size: 0.99em; /* 相对正文缩放，也可以写具体值如 14px */
   background-color: #f0f0f0;
   padding: 0.1em 0.2em;

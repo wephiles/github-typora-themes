@@ -1,0 +1,732 @@
+@font-face {
+  font-family: "HanChanJinShuSong";
+  src: url("./寒蝉锦书宋.otf");
+}
+
+@font-face {
+  font-family: "Noto Sans SC Medium";
+  src: url(./NotoSansSC-Medium.otf);
+}
+
+/* ============================================================
+   new- 主题新增：卡片样式自定义参数（想调整外观改这里即可）
+   --card-bg-color      卡片背景色（TOC / frontmatter / 公式块使用）
+   --card-border-color  卡片边框色
+   --card-border-radius 卡片圆角：默认尖角 0px，改成 8px、12px 等即为圆角卡片
+   ============================================================ */
+:root {
+  --card-bg-color: var(--codeblock-bg-color, #f6f8fa);
+  --card-border-color: var(--header-lr-border-color, #d0d7de);
+  --card-border-radius: 0px;
+}
+
+html {
+  font-size: 16px; /* new- 主题修改：字号还原为主题最初定义的16px */
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family:
+    "Noto Sans SC Medium", "HanChanJinShuSong", Helvetica, Arial, sans-serif;
+  color: rgb(51, 51, 51);
+  line-height: 1.6;
+}
+
+#write {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 30px;
+  padding-bottom: 100px;
+  color: var(--main-text-color);
+}
+
+@media only screen and (min-width: 1400px) {
+  #write {
+    max-width: 1024px;
+  }
+}
+
+@media only screen and (min-width: 1800px) {
+  #write {
+    max-width: 1200px;
+  }
+}
+
+#write > ul:first-child,
+#write > ol:first-child {
+  margin-top: 30px;
+}
+
+cursor {
+  color: var(--text-cursor-color);
+}
+
+a {
+  color: var(--a-color);
+}
+strong {
+  font-weight: bold;
+  color: var(--text-strong-color);
+}
+strong code {
+  color: var(--text-strong-color);
+}
+em {
+  font-style: italic;
+  color: var(--text-em-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  font-weight: bold;
+  line-height: 1.4;
+  cursor: text;
+}
+#write h1:hover a.anchor,
+#write h2:hover a.anchor,
+#write h3:hover a.anchor,
+#write h4:hover a.anchor,
+#write h5:hover a.anchor,
+#write h6:hover a.anchor {
+  text-decoration: none;
+}
+h1 tt,
+h1 code {
+  font-size: inherit;
+}
+h2 tt,
+h2 code {
+  font-size: inherit;
+}
+h3 tt,
+h3 code {
+  font-size: inherit;
+}
+h4 tt,
+h4 code {
+  font-size: inherit;
+}
+h5 tt,
+h5 code {
+  font-size: inherit;
+}
+h6 tt,
+h6 code {
+  font-size: inherit;
+}
+h1 {
+  font-size: 2.1em;
+  line-height: 1.2;
+  color: var(--h1-4-text-color);
+  text-align: center;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  background-color: var(--h1-background-color);
+  border-left: 0.5rem solid var(--header-lr-border-color);
+  border-right: 0.5rem solid var(--header-lr-border-color);
+}
+h2 {
+  font-size: 1.8em;
+  line-height: 1.225;
+  color: var(--h1-4-text-color);
+  border-bottom: 0.13rem solid var(--header-bottom-border-color);
+}
+h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+  color: var(--h1-4-text-color);
+  border-bottom: 0.12rem dashed var(--header-bottom-border-color);
+}
+h4 {
+  font-size: 1.2em;
+  color: var(--h1-4-text-color);
+}
+h5 {
+  font-size: 1.1em;
+  color: var(--h5-text-color);
+}
+h6 {
+  font-size: 1em;
+  color: var(--h6-text-color);
+}
+/* new- 主题修改：二、三、四、五、六级标题统一加左侧竖条（与原四级标题样式一致）
+   全部属性加 !important：真实 Typora 中 base.css 以及主题之后的 *.user.css 会在悬停等
+   状态下用更高优先级的伪元素样式顶掉竖条，必须用 !important 才能保住 */
+#write h2:before,
+#write h3:before,
+#write h4:before,
+#write h5:before,
+#write h6:before {
+  content: "" !important;
+  display: inline-block !important;
+  background: var(--header-lr-border-color) !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  width: 0.3rem !important;
+  vertical-align: middle !important;
+  margin-right: 0.5rem !important;
+  height: 1.12em !important; /* new- 主题修改：标题行高1.4em×80%=1.12em，em随各级标题字号自动缩放 */
+  transform: translateY(-0.1rem) !important;
+  border: 0px;
+  position: unset;
+  padding: 0px;
+  font-size: 0px;
+  line-height: unset;
+  border-radius: 0px;
+  float: unset;
+}
+#write>h2.md-focus:before,
+#write>h3.md-focus:before,
+#write>h4.md-focus:before,
+#write>h5.md-focus:before,
+#write>h6.md-focus:before,
+/* new- 主题修改：鼠标悬停/聚焦/悬停+聚焦时 Typora 会用伪元素显示标题级别徽标导致竖条消失，
+   这里把这些状态一并重置，保持竖条始终显示 */
+#write>h2:hover:before,
+#write>h3:hover:before,
+#write>h4:hover:before,
+#write>h5:hover:before,
+#write>h6:hover:before,
+#write>h2.md-focus:hover:before,
+#write>h3.md-focus:hover:before,
+#write>h4.md-focus:hover:before,
+#write>h5.md-focus:hover:before,
+#write>h6.md-focus:hover:before {
+  content: "" !important;
+  display: inline-block !important;
+  background: var(--header-lr-border-color) !important;
+  opacity: 1 !important;
+  border: 0px !important;
+  position: unset !important;
+  padding: 0px !important;
+  font-size: 0px !important;
+  line-height: unset !important;
+  border-radius: 0px !important;
+  float: unset !important;
+  width: 0.3rem !important;
+  vertical-align: middle !important;
+  margin-right: 0.5rem !important;
+  height: 1.12em !important;
+  transform: translateY(-0.1rem) !important;
+  pointer-events: none !important;
+}
+
+img {
+  border: 1px solid var(--img-border-color);
+}
+
+mark {
+  background: var(--mark-bg-color);
+  color: var(--main-text-color);
+}
+
+p,
+blockquote,
+ul,
+ol,
+dl,
+table {
+  margin: 0.7em 0;
+}
+li > ol,
+li > ul {
+  margin: 0 0;
+}
+/* 水平分割线 horizontal rule */
+hr {
+  height: 0.1rem;
+  padding: 0;
+  margin: 16px 0;
+  background-color: var(--hr-color);
+  border: 0 none;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+li p.first {
+  display: inline-block;
+}
+ul,
+ol {
+  padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+  margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
+}
+/* new- 主题修改：引用块改为卡片样式（保留左侧装饰竖条） */
+blockquote {
+  border: 1px solid var(--card-border-color, #d0d7de);
+  border-left: 4px solid var(--blockquote-decoration-color);
+  background-color: var(--blockquote-bg-color);
+  padding: 8px 14px;
+  border-radius: var(--card-border-radius, 0px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+blockquote blockquote {
+  padding-right: 0;
+}
+table {
+  padding: 0;
+  word-break: initial;
+}
+thead {
+  background-color: var(--table-thead-bg-color);
+}
+table th {
+  font-weight: bold;
+  border: 0.05rem solid var(--table-border-color);
+  border-bottom: 0;
+  margin: 0;
+  padding: 6px 13px;
+}
+table td {
+  border: 0.05rem solid var(--table-border-color);
+  margin: 0;
+  padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+  margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+  margin-bottom: 0;
+}
+
+/* new- 主题修改：表格斑马纹 + 鼠标悬浮颜色变深（带过渡动画） */
+table.md-table tbody tr td {
+  transition: background-color 0.25s ease;
+}
+table.md-table tbody tr:nth-child(2n) td {
+  background-color: var(--table-thead-bg-color);
+}
+table.md-table tbody tr:hover td {
+  background-color: var(--table-border-color);
+}
+
+.CodeMirror-lines {
+  padding-left: 4px;
+}
+
+.code-tooltip {
+  box-shadow: 0 1px 1px 0 rgba(0, 28, 36, 0.3);
+  border-top: 1px solid #eef2f2;
+}
+
+/* 代码块 */
+.md-fences,
+tt {
+  font-size: 95%;
+  background-color: var(--codeblock-bg-color);
+  padding: 12px 4px 9px 4px;
+}
+
+/* new- 主题新增：代码块卡片样式 + mac 三圆点
+   （mermaid 图表的容器也是 .md-fences，会一起生效；想调整圆点间距改 margin / box-shadow 偏移） */
+pre.md-fences {
+  border: none; /* new- 主题修改：去掉明显边框，改为纯色块+阴影的柔和卡片 */
+  border-radius: var(--card-border-radius, 0px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+pre.md-fences::before {
+  content: "";
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #ff5f56;
+  box-shadow:
+    18px 0 0 #ffbd2e,
+    36px 0 0 #27c93f;
+  margin: 2px 0 10px 16px; /* new- 主题修改：圆点右移一点（原10px） */
+}
+/* new- 主题新增：mermaid 渲染面板加白色底衬，图表与背景对比更清晰
+   position:relative：防止 base.css 把面板绝对定位到卡片顶部压住圆点，保证圆点与图表上下间距统一 */
+pre.md-fences.md-diagram .md-diagram-panel {
+  background-color: #ffffff;
+  padding: 8px 12px;
+  position: relative;
+}
+/* new- 主题新增：mermaid 卡片顶部间距与普通代码块保持一致（防 base.css 覆盖） */
+#write pre.md-fences.md-diagram {
+  padding-top: 12px;
+}
+
+/* 行内代码 */
+code {
+  color: var(--code-inline--color);
+  background-color: var(--code-inline-bg-color);
+  padding: 2px;
+  font-size: 95%;
+  display: inline;
+  vertical-align: middle;
+}
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+  html {
+    font-size: 13px;
+  }
+  pre {
+    page-break-inside: avoid;
+    word-wrap: break-word;
+  }
+}
+
+/* new- 主题修改：YAML frontmatter 卡片样式 */
+#write pre.md-meta-block {
+  padding: 1rem;
+  padding-top: 0.7rem; /* new- 主题修改：圆点上移、文本贴近上边框（原2.2rem） */
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: var(--card-bg-color, #f7f7f7);
+  border: 1px solid var(--card-border-color, #d0d7de);
+  border-radius: var(--card-border-radius, 0px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  color: #777777;
+  margin-top: 0 !important;
+}
+
+/* new- 主题新增：YAML frontmatter 卡片 mac 三圆点
+   统一圆点位置：距卡片顶 14px、圆点与内容间距 10px（与代码块一致） */
+#write pre.md-meta-block::before {
+  content: "";
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #ff5f56;
+  box-shadow:
+    18px 0 0 #ffbd2e,
+    36px 0 0 #27c93f;
+  margin: 2px 0 10px 2px;
+}
+/* new- 主题新增：新建空 YAML 时占位提示正常显示，不再错乱
+   1) 空状态强制圆点样式，防止 Typora 的占位伪元素混进圆点位置显示成乱字符；
+   2) 用自定义 ::after 给出清晰的中文占位提示 */
+#write pre.md-meta-block:empty::before {
+  content: "" !important;
+  display: block !important;
+  width: 11px !important;
+  height: 11px !important;
+  border-radius: 50% !important;
+  background-color: #ff5f56 !important;
+  box-shadow:
+    18px 0 0 #ffbd2e,
+    36px 0 0 #27c93f !important;
+  margin: 2px 0 10px 2px !important;
+  position: static !important;
+  float: none !important;
+  font-size: 0 !important;
+}
+#write pre.md-meta-block::after {
+  position: static !important;
+  float: none !important;
+  display: inline !important;
+  font-size: inherit;
+  white-space: normal;
+}
+#write pre.md-meta-block:empty::after {
+  content: "input YAML Front Matter here.";
+  color: #9aa5b1;
+  font-size: 85%;
+}
+#write pre.md-meta-block {
+  min-height: 4em; /* 空状态保住“圆点 + 一行提示”的卡片高度 */
+}
+
+.mathjax-block > .code-tooltip {
+  bottom: 0.375rem;
+}
+
+/* new- 主题新增：公式块卡片样式 */
+.mathjax-block {
+  background-color: var(--card-bg-color, #f7f7f7);
+  border: 1px solid var(--card-border-color, #d0d7de);
+  border-radius: var(--card-border-radius, 0px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 0.6rem 1rem;
+  margin: 0.7em 0;
+}
+
+.md-mathjax-midline {
+  background: #fafafa;
+}
+
+.md-image > .md-meta {
+  /*border: 1px solid #ddd;*/
+  border-radius: 3px;
+  padding: 2px 0px 0px 4px;
+  font-size: 0.9em;
+  color: inherit;
+}
+
+.md-tag {
+  color: #a7a7a7;
+  opacity: 1;
+}
+
+/* new- 主题修改：TOC 卡片样式 + mac 三圆点；宽度与正文/YAML 区对齐 */
+#write .md-toc {
+  margin-top: 20px;
+  margin-left: 0 !important; /* 防止 base.css 的边距导致卡片比正文宽 */
+  margin-right: 0 !important;
+  width: 100% !important; /* border-box 下与 #write 内容区恰好同宽 */
+  box-sizing: border-box;
+  position: relative; /* 作为弹出目录条 .md-toc-tooltip 的定位基准 */
+  padding: 12px 16px 14px; /* new- 主题修改：圆点位置与代码块统一（顶部间距12px） */
+  background-color: var(--card-bg-color, #f7f7f7);
+  border: 1px solid var(--card-border-color, #d0d7de);
+  border-radius: var(--card-border-radius, 0px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.md-toc::before {
+  content: "";
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #ff5f56;
+  box-shadow:
+    18px 0 0 #ffbd2e,
+    36px 0 0 #27c93f;
+  margin: 2px 0 10px 2px; /* new- 主题修改：圆点位置与代码块统一（距顶14px、下方间距10px） */
+}
+/* new- 主题新增：TOC 内容条目紧贴圆点，去掉段落自带的外边距 */
+#write .md-toc .md-toc-content {
+  margin: 0;
+  min-height: 1.4em; /* 空目录时保留一行高度，避免卡片塌陷 */
+}
+/* new- 主题新增：修复无标题文档时 [TOC] 占位文字溢出卡片的问题
+   （把 Typora 占位伪元素强制拉回正常文档流内显示） */
+#write .md-toc .md-toc-content::before,
+#write .md-toc .md-toc-content::after {
+  position: static !important;
+  float: none !important;
+  display: inline;
+  font-size: 1em;
+  line-height: inherit;
+}
+/* new- 主题新增：点击 TOC 后弹出的目录条与目录卡片同宽、左右对齐 */
+.md-toc .md-toc-tooltip {
+  left: 0;
+  right: 0;
+  width: auto;
+  max-width: 100%;
+  transform: none;
+  box-sizing: border-box;
+}
+
+.sidebar-tabs {
+  border-bottom: none;
+}
+
+#typora-quick-open {
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+  background-color: #fafafa;
+  border-color: #fefefe #e5e5e5 #e5e5e5 #eee;
+  border-style: solid;
+  border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+  border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header,
+.context-menu,
+.megamenu-content,
+footer {
+  font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state {
+  visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+  background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+  color: #b4654d;
+}
+
+#md-notification .btn {
+  border: 0;
+}
+
+.ty-preferences .window-content {
+  background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+  color: white;
+  background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+  background-color: #f5f8fa;
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.8),
+    hsla(0, 0%, 100%, 0)
+  );
+}
+
+/****** Sidebar and Quick open******/
+#typora-quick-open {
+  color: var(--control-text-color); /* 控制侧边栏所有前景色均为控制文本色 */
+}
+
+.typora-quick-open-item-path {
+  /* file path in the Quick open panel*/
+  white-space: nowrap;
+}
+
+/* 大纲文本覆盖色 */
+.outline-item:hover {
+  background-color: var(--active-file-bg-color);
+}
+
+#sidebar-files-menu {
+  border: 1px solid var(--sidebar-border-color); /* 侧边栏下方文件操作板边框色 */
+}
+
+#file-library-tree .file-tree-node {
+  padding-left: 0.9em; /* 文件树每级缩进 */
+  color: var(--control-text-color);
+}
+
+.file-tree-node .file-node-content:hover {
+  background-color: var(--sidebar-btn-hover-color); /* 鼠标指向文件时的背景色 */
+  cursor: pointer;
+}
+
+/* new- 主题新增：左侧文件树字体加粗（含文件列表视图） */
+#file-library-tree .file-node-title,
+#file-library-list .file-node-title {
+  font-weight: bold;
+}
+
+/* new- 主题新增：左侧文件树字体与间距
+   英文/数字用 Segoe UI，中文回退到微软雅黑 */
+#file-library-tree .file-node-content,
+#file-library-list .file-node-content {
+  font-family: "Segoe UI", "微软雅黑", "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  padding: 2px 8px;
+  line-height: 1.5;
+}
+
+/* new- 主题新增：侧边栏大纲里的行内代码跟随侧边栏文字颜色
+   修复 dogs-jidilan 深色侧边栏下标题含 `代码` 时看不清的问题（侧边弹出大纲同样生效） */
+.outline-item .outline-label code {
+  color: var(--control-text-color, inherit);
+  background-color: transparent;
+  padding: 0 1px;
+  font-size: inherit;
+  vertical-align: baseline;
+  border-radius: 2px;
+}
+.outline-item .outline-label code::before,
+.outline-item .outline-label code::after {
+  content: none; /* 去掉部分主题给行内代码加的反引号装饰 */
+}
+
+#typora-sidebar #ty-sidebar-footer .sidebar-footer-item:hover {
+  background: var(
+    --sidebar-btn-hover-color
+  ); /* 侧边栏下方操作栏按钮 hover 色 */
+}
+
+#typora-sidebar
+  #ty-sidebar-footer
+  #sidebar-files-menu
+  .show
+  + .menuitem-group-label.show {
+  border-color: var(
+    --sidebar-border-color
+  ); /* 侧边栏下方文件操作板里项目边框色 */
+}
+
+#typora-sidebar #ty-sidebar-footer {
+  border-top: 1px solid var(--sidebar-border-color); /* 侧边栏下方操作栏边框色 */
+}
+
+#typora-sidebar #ty-sidebar-footer #sidebar-files-menu li > a:hover {
+  background: var(
+    --sidebar-btn-hover-color
+  ); /* 侧边栏下方文件操作板 按钮 hover 颜色 */
+}
+
+/* 侧边栏下方文件操作板里 文件排序规则选项按钮 active */
+#typora-sidebar #ty-sidebar-footer #sidebar-files-menu .ty-side-sort-btn.active,
+/* 侧边栏下方文件操作板里 当前文件夹后缀小圆点 */
+#typora-sidebar #ty-sidebar-footer #sidebar-files-menu .selected-folder-menu-item a:after {
+  color: var(--sidebar-sort-btn-active-color);
+}
+
+#typora-sidebar #ty-sidebar-footer #sidebar-files-menu .ty-side-sort-btn:hover {
+  cursor: pointer;
+  color: var(
+    --sidebar-sort-btn-active-color
+  ); /* 侧边栏下方文件操作板里 文件排序规则选项按钮 hover 颜色 */
+}
+
+/* sidebar tab for windows */
+.info-panel-tab:hover {
+  color: var(--control-text-color);
+}
+
+.sidebar-menu {
+  color: var(--control-text-color);
+}
+
+.sidebar-menu .dropdown-menu > li > a,
+.sidebar-menu .dropdown-menu > li > a:focus,
+.sidebar-menu .dropdown-menu > li > a:hover {
+  color: var(--control-text-color);
+}
+
+.dropdown-menu .selected-folder-menu-item a:after {
+  color: var(--control-text-color);
+}
+
+/* sidebar search*/
+.sidebar-menu .ty-sidebar-search-panel #file-library-search-input {
+  color: var(--control-text-color);
+  background: var(--sidebar-search-bg-color);
+  border: 1px solid var(--sidebar-border-color);
+}
+
+.sidebar-menu .ty-sidebar-search-panel #file-library-search-input:focus {
+  border-color: var(--sidebar-search-focus-border-color);
+}
+
+.sidebar-menu .ty-sidebar-search-panel {
+  border-bottom: 1px solid var(--sidebar-border-color);
+}
+
+#typora-sidebar-resizer.dragging {
+  color: var(--sidebar-resizer-color); /* 侧边栏宽度设置线颜色 */
+}

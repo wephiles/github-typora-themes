@@ -3,12 +3,12 @@
    此处不再设置宽度，避免在 base.user.css 之后加载而覆盖用户配置 */
 
 #write {
-    font-size: 1.25rem;
-    line-height: 1.625rem;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
 }
 
 p {
-    line-height: 2rem;
+  line-height: 2rem;
 }
 
 pre,
@@ -16,7 +16,7 @@ code,
 kbd,
 tt,
 var {
-    font-size: 0.875em;
+  font-size: 0.875em;
 }
 
 /* ============================================================================
@@ -58,7 +58,7 @@ var {
 #write pre.md-meta-block::before,
 #write pre.md-fences::before,
 #write .md-toc::before {
-  content: '';
+  content: "";
   display: block;
   width: var(--pro-dot-size);
   height: var(--pro-dot-size);
@@ -66,7 +66,8 @@ var {
   background: var(--pro-dot-red);
   box-shadow:
     calc(var(--pro-dot-size) + var(--pro-dot-gap)) 0 0 0 var(--pro-dot-yellow),
-    calc((var(--pro-dot-size) + var(--pro-dot-gap)) * 2) 0 0 0 var(--pro-dot-green);
+    calc((var(--pro-dot-size) + var(--pro-dot-gap)) * 2) 0 0 0
+      var(--pro-dot-green);
 }
 #write pre.md-meta-block::before,
 #write pre.md-fences::before,
@@ -202,11 +203,26 @@ var {
 
 /* —— 8. 标题字号梯度：h1 保持 2.5rem 不变，
       h2–h6 整体增大，自上而下平缓递减（差距约 8.8 / 4 / 2.4 / 2.4 / 1.6 px） —— */
-#write h2 { font-size: 1.95rem; line-height: 1.4; }
-#write h3 { font-size: 1.7rem;  line-height: 1.4; }
-#write h4 { font-size: 1.55rem; line-height: 1.4; }
-#write h5 { font-size: 1.4rem;  line-height: 1.4; }
-#write h6 { font-size: 1.3rem;  line-height: 1.4; }
+#write h2 {
+  font-size: 1.95rem;
+  line-height: 1.4;
+}
+#write h3 {
+  font-size: 1.7rem;
+  line-height: 1.4;
+}
+#write h4 {
+  font-size: 1.55rem;
+  line-height: 1.4;
+}
+#write h5 {
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+#write h6 {
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
 
 /* —— 9. Mermaid 图表卡片 —— */
 /* 不同版本 Typora 渲染 mermaid 时的节点类名不一致（实测有的版本没有 md-mermaid），
@@ -231,4 +247,30 @@ var {
 #write pre.md-fences.md-mermaid::before,
 #write pre.md-fences.md-fences-advanced::before {
   margin: 2px 0 10px 2px;
+}
+/* ===== 修复空 YAML frontmatter 占位显示错乱（通用） ===== */
+/* 1) 隐藏 Typora 在空 YAML 上画错的占位伪元素 */
+#write pre.md-meta-block:empty::before,
+#write pre.md-meta-block:empty::after {
+  display: none !important;
+}
+/* 2) 用自己的文字提示替代（挂在 ::after 上） */
+#write pre.md-meta-block:empty::after {
+  display: inline !important;
+  content: "input YAML Front Matter here.";
+  color: #9aa5b1; /* 提示文字颜色，可按主题改 */
+  font-size: 85%;
+  position: static !important;
+  float: none !important;
+  white-space: normal;
+}
+/* 3) 非空状态下伪元素也不许乱跑（只管 ::after，不动别的主题可能用到的 ::before） */
+#write pre.md-meta-block::after {
+  position: static !important;
+  float: none !important;
+  white-space: normal;
+}
+/* 4) 空状态保住卡片高度，不塌陷 */
+#write pre.md-meta-block:empty {
+  min-height: 2.5em;
 }

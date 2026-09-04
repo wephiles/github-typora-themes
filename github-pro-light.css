@@ -19,7 +19,7 @@
 
   /* 正文/版心 */
   --gp-content-width: 85%; /* 与 base.user.css 的 85% 保持一致 */
-  --gp-font-size: 16px;
+  --gp-font-size: 17px; /* 2026-09：16px → 17px，整体字号 +1 */
   --gp-line-height: 1.7;
 
   /* 品牌与链接 */
@@ -72,6 +72,10 @@
   --gp-table-header-bg: #f6f8fa;
   --gp-table-stripe: #fbfcfd;
   --gp-table-hover: #f0f3f6;
+
+  /* mermaid 图表卡片：比默认 #f6f8fa 深一档，卡片轮廓更清楚 */
+  --gp-mermaid-bg: #e9edf2;
+  --gp-mermaid-border: #d0d7de;
 
   /* 分割线/其他块 */
   --gp-meta-bg: #f6f8fa;
@@ -350,11 +354,11 @@ li p.first {
   display: inline-block;
 }
 hr {
-  height: 4px;
+  height: 3px; /* 原 4px，细约 25% */
   padding: 0;
   margin: 16px 0;
   background-color: var(--gp-hr);
-  border-radius: 2px;
+  border-radius: 1.5px;
   border: 0 none;
   overflow: hidden;
   box-sizing: content-box;
@@ -735,6 +739,21 @@ tt {
   right: auto !important;
 }
 
+/* TOC 空状态：文档没有标题时，Typora 会显示占位文本 "[TOC]"，观感很怪。
+   这里接管空内容状态的伪元素：隐藏占位，改为一行友好的灰色提示。 */
+#write .md-toc .md-toc-content:empty::before {
+  content: none !important;
+  display: none !important;
+}
+#write .md-toc .md-toc-content:empty::after {
+  content: "目录为空 —— 在正文中插入标题后，这里会自动生成目录";
+  display: block;
+  color: var(--gp-text-faint);
+  font-size: 0.92em;
+  line-height: 1.8;
+  padding: 6px 2px 8px;
+}
+
 /* --------------------------------------------------------------------------
    【13】侧边栏 IDE 化（只改样式，不动折叠/拖宽/点击/跳转）
    -------------------------------------------------------------------------- */
@@ -933,6 +952,40 @@ tt {
   color: var(--gp-text) !important;
 }
 
+/* mermaid 图表卡片加深：背景比普通代码块深一档，同时保证内部面板
+   透明、由外层卡片提供底色，轮廓更清楚 */
+#write pre.md-fences.md-diagram.md-fences-advanced {
+  background-color: var(--gp-mermaid-bg);
+  border-color: var(--gp-mermaid-border);
+}
+.md-diagram-panel,
+.md-diagram-panel-preview {
+  background-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   【16.5】公式块卡片化
+   与代码块/YAML/TOC 同一套卡片语言（浅灰底、描边、圆角、轻阴影）。
+   -------------------------------------------------------------------------- */
+#write .mathjax-block .md-rawblock-container,
+#write .mathjax-block .md-math-container {
+  box-sizing: border-box;
+  background-color: var(--gp-quote-bg);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius-m);
+  padding: 22px 16px;
+  margin: 18px 0;
+  box-shadow: var(--gp-shadow);
+  overflow-x: auto;
+}
+/* 编辑公式（点击进入 LaTeX 源码编辑态）时保持同一卡片外观 */
+#write .mathjax-block .md-rawblock-container .md-rawblock-panel,
+#write .mathjax-block .md-rawblock-container .md-rawblock-edit-panel {
+  background-color: var(--gp-bg);
+  border: 0;
+  border-radius: 6px;
+}
+
 /* --------------------------------------------------------------------------
    【窗口布局】侧边栏与编辑区圆角 + 中间留一点缝（浮动卡片感）。
    注意：属布局层面的样式改动，若侧栏拖宽/折叠出现异常，请告诉我窗口级 DOM。
@@ -1016,6 +1069,8 @@ html {
   blockquote,
   #write pre.md-meta-block,
   .md-toc,
+  #write .mathjax-block .md-rawblock-container,
+  #write .mathjax-block .md-math-container,
   table {
     box-shadow: none !important;
   }
@@ -1028,6 +1083,15 @@ html {
   }
   blockquote {
     background-color: #f6f8fa !important;
+  }
+  /* 打印时公式块卡片与空目录提示的处理 */
+  #write .mathjax-block .md-rawblock-container,
+  #write .mathjax-block .md-math-container {
+    background-color: #f6f8fa !important;
+    border-color: #d0d7de !important;
+  }
+  #write .md-toc .md-toc-content:empty::after {
+    content: none !important;
   }
   .md-fences::before {
     content: none;
@@ -1060,4 +1124,30 @@ html {
 /* @page 页边距：Chromium 不允许 @page 嵌套在 @media 内，必须置于顶层 */
 @page {
   margin: 18mm 16mm;
+}
+/* ===== 修复空 YAML frontmatter 占位显示错乱（通用） ===== */
+/* 1) 隐藏 Typora 在空 YAML 上画错的占位伪元素 */
+#write pre.md-meta-block:empty::before,
+#write pre.md-meta-block:empty::after {
+  display: none !important;
+}
+/* 2) 用自己的文字提示替代（挂在 ::after 上） */
+#write pre.md-meta-block:empty::after {
+  display: inline !important;
+  content: "input YAML Front Matter here.";
+  color: #9aa5b1; /* 提示文字颜色，可按主题改 */
+  font-size: 85%;
+  position: static !important;
+  float: none !important;
+  white-space: normal;
+}
+/* 3) 非空状态下伪元素也不许乱跑（只管 ::after，不动别的主题可能用到的 ::before） */
+#write pre.md-meta-block::after {
+  position: static !important;
+  float: none !important;
+  white-space: normal;
+}
+/* 4) 空状态保住卡片高度，不塌陷 */
+#write pre.md-meta-block:empty {
+  min-height: 2.5em;
 }

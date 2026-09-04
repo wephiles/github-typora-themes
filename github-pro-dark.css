@@ -19,39 +19,51 @@
 :root {
   color-scheme: dark;
 
-  --bg-color: #0d1117;
-  --side-bar-bg-color: #010409;
+  /* 2026-09 调整：整体提亮一档（编辑区 + 侧边栏文件树），滚动条同步加亮 */
+  --bg-color: #151b23;
+  --side-bar-bg-color: #1d242e;
   --text-color: #b8c0cc;
   --text-strong-color: #cdd4dd;
   --text-bold-color: #f0f6fc;
-  --text-muted-color: #858f9b;
+  --text-muted-color: #8b95a1;
   --accent-color: #78a7d1;
   --accent-hover-color: #8bb5d9;
-  --surface-overlay: #161b22;
-  --surface-raised: #21262d;
-  --surface-active: #1f2937;
-  --border-color: #30363d;
-  --hint-color: #858f9b;
+  --surface-overlay: #1e252e;
+  --surface-raised: #29323d;
+  --surface-active: #2b3542;
+  --border-color: #3d444d;
+  --hint-color: #8b95a1;
   --control-text-color: var(--text-muted-color);
   --control-text-hover-color: var(--text-strong-color);
   --primary-color: var(--accent-color);
-  --window-border: 1px solid #30363d;
+  --window-border: 1px solid #3d444d;
+  /* 表格网格线（含竖线）：比普通边框更亮，保证竖线清晰可见 */
+  --table-grid-color: #454e58;
+  /* mermaid 图表卡片：比代码块更深一档，卡片轮廓更清楚 */
+  --mermaid-card-bg: #10161d;
 
   --select-text-bg-color: rgba(120, 167, 209, 0.3);
   --select-text-font-color: #d8dee6;
-  --item-hover-bg-color: #161b22;
+  --item-hover-bg-color: #26303b;
   --item-hover-text-color: var(--text-strong-color);
-  --active-file-bg-color: #1f2937;
+  --active-file-bg-color: #2b3542;
   --active-file-border-color: var(--accent-color);
   --active-file-text-color: var(--text-strong-color);
   --search-select-bg-color: rgba(174, 126, 35, 0.35);
-  --rawblock-edit-panel-bd: #161b22;
+  --rawblock-edit-panel-bd: #1e252e;
   --mermaid-theme: night;
 }
 
 html,
 body {
   background-color: var(--bg-color);
+}
+
+/* 整体字号：覆盖 github/base.css 的 html{font-size:16px}，+1px。
+   正文/标题均为 em/rem 相对单位，会同步放大；工具条、角标等固定 px 的
+   界面元素不受影响。 */
+html {
+  font-size: 17px;
 }
 
 body,
@@ -100,7 +112,7 @@ b,
 
 h1,
 h2 {
-  border-bottom-color: #21262d;
+  border-bottom-color: #2c3540;
 }
 
 h6,
@@ -109,12 +121,15 @@ blockquote,
   color: var(--text-muted-color);
 }
 
+/* 水平分割线：base.css 原为 2px，改为 1.5px（细约 25%），颜色随边框提亮 */
 hr {
-  background-color: #30363d;
+  height: 1.5px;
+  border-radius: 1px;
+  background-color: #3d444d;
 }
 
 blockquote {
-  border-left-color: #30363d;
+  border-left-color: #3d444d;
 }
 
 .on-focus-mode blockquote {
@@ -124,20 +139,20 @@ blockquote {
 table tr,
 table th,
 table td {
-  border-color: #30363d;
+  border-color: var(--table-grid-color);
 }
 
 table tr:nth-child(2n),
 thead {
-  background-color: #161b22;
+  background-color: #1e252e;
 }
 
 .md-fences,
 code,
 tt {
   color: var(--text-color);
-  background-color: #161b22;
-  border-color: #30363d;
+  background-color: #1e252e;
+  border-color: #3d444d;
 }
 
 code {
@@ -147,22 +162,22 @@ code {
 .code-tooltip,
 .md-hover-tip {
   color: var(--text-color);
-  background-color: #161b22;
-  border-color: #30363d;
+  background-color: #1e252e;
+  border-color: #3d444d;
   box-shadow: 0 1px 1px 0 rgba(1, 4, 9, 0.8);
 }
 
 .code-tooltip {
-  border-top-color: #30363d;
+  border-top-color: #3d444d;
 }
 
 .popover.bottom > .arrow::after {
-  border-bottom-color: #161b22;
+  border-bottom-color: #1e252e;
 }
 
 #write pre.md-meta-block,
 .md-mathjax-midline {
-  background-color: #161b22;
+  background-color: #1e252e;
 }
 
 .md-tag,
@@ -182,8 +197,9 @@ code {
 }
 
 /* Mermaid diagrams */
-.md-diagram-panel[lang="mermaid"],
+.md-diagram-panel,
 .md-diagram-panel-preview,
+.md-diagram-panel[lang="mermaid"],
 [lang="mermaid"] svg {
   color: var(--text-color);
   background-color: transparent;
@@ -197,7 +213,7 @@ code {
 [lang="mermaid"] .actor,
 [lang="mermaid"] .classGroup rect,
 [lang="mermaid"] .stateGroup rect {
-  fill: #161b22 !important;
+  fill: #1e252e !important;
   stroke: var(--accent-color) !important;
 }
 
@@ -218,9 +234,9 @@ code {
 [lang="mermaid"] .edgeLabel rect,
 [lang="mermaid"] .labelBox {
   color: var(--text-color) !important;
-  fill: #0d1117 !important;
-  background-color: #0d1117 !important;
-  stroke: #30363d !important;
+  fill: #151b23 !important;
+  background-color: #151b23 !important;
+  stroke: #3d444d !important;
 }
 
 [lang="mermaid"] .flowchart-link,
@@ -245,8 +261,8 @@ code {
 [lang="mermaid"] .activation0,
 [lang="mermaid"] .activation1,
 [lang="mermaid"] .activation2 {
-  fill: #21262d !important;
-  stroke: #484f58 !important;
+  fill: #29323d !important;
+  stroke: #59626d !important;
 }
 
 [lang="mermaid"] .task,
@@ -263,8 +279,8 @@ code {
 [lang="mermaid"] .section1,
 [lang="mermaid"] .section2,
 [lang="mermaid"] .section3 {
-  fill: #21262d !important;
-  stroke: #30363d !important;
+  fill: #29323d !important;
+  stroke: #3d444d !important;
 }
 
 mark {
@@ -279,8 +295,8 @@ sup.md-footnote {
 
 kbd {
   color: var(--text-color);
-  background-color: #21262d;
-  border-color: #30363d;
+  background-color: #29323d;
+  border-color: #3d444d;
 }
 
 input,
@@ -290,8 +306,8 @@ button,
 .btn,
 .form-control {
   color: var(--text-color);
-  background-color: #0d1117;
-  border-color: #30363d;
+  background-color: #151b23;
+  border-color: #3d444d;
   font-weight: 500;
 }
 
@@ -305,7 +321,7 @@ button:focus,
 }
 
 .md-task-list-item > input::before {
-  background-color: #0d1117;
+  background-color: #151b23;
   border-color: var(--text-muted-color);
 }
 
@@ -321,7 +337,7 @@ button:focus,
 #typora-source .CodeMirror-scroll,
 #typora-source .CodeMirror-sizer,
 .cm-s-typora-default.CodeMirror {
-  background-color: #0d1117;
+  background-color: #151b23;
 }
 
 /* Code-fence internals inherit the fence surface instead of drawing black rows. */
@@ -337,7 +353,7 @@ button:focus,
 }
 
 .CodeMirror-gutters {
-  border-right-color: #21262d;
+  border-right-color: #2c3540;
 }
 
 .CodeMirror-linenumber,
@@ -438,7 +454,7 @@ button:focus,
 .sidebar-footer {
   color: var(--text-muted-color);
   background-color: var(--side-bar-bg-color);
-  border-color: #21262d;
+  border-color: #2c3540;
 }
 
 .mac-seamless-mode #typora-sidebar {
@@ -448,7 +464,7 @@ button:focus,
 .sidebar-tabs,
 .sidebar-tabs-content {
   color: var(--text-muted-color);
-  border-color: #21262d;
+  border-color: #2c3540;
 }
 
 .sidebar-tab.active,
@@ -468,7 +484,7 @@ button:focus,
 /* Dark, restrained selection treatment for documents in File List view. */
 #file-library-list-children .file-list-item.active {
   color: var(--text-strong-color) !important;
-  background-color: #111d2b !important;
+  background-color: #1e2d40 !important;
   box-shadow: inset 2px 0 0 #527fa8;
   transition:
     color 0.12s ease,
@@ -478,7 +494,7 @@ button:focus,
 #file-library-list-children .file-list-item.active:hover,
 #file-library-list-children .file-list-item.active:focus {
   color: var(--text-strong-color) !important;
-  background-color: #142337 !important;
+  background-color: #24374e !important;
   outline: 0;
 }
 
@@ -532,8 +548,9 @@ button:focus,
   border-radius: 0 !important;
 }
 
+/* 滚动条：背景提亮后同步加亮滑块，保证始终清晰可见 */
 ::-webkit-scrollbar-thumb {
-  background-color: #282e35 !important;
+  background-color: #454e58 !important;
 }
 
 ::-webkit-scrollbar-button,
@@ -548,32 +565,32 @@ button:focus,
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #343b44 !important;
+  background-color: #525c67 !important;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background-color: #414a55 !important;
+  background-color: #5f6a76 !important;
 }
 
 /* Quick Open, search and transient panels */
 #typora-quick-open,
 .auto-suggest-container {
   color: var(--text-color);
-  background-color: #161b22;
-  border-color: #30363d;
+  background-color: #1e252e;
+  border-color: #3d444d;
 }
 
 #typora-quick-open input {
   color: var(--text-strong-color);
-  background-color: #0d1117;
-  border-color: #30363d;
+  background-color: #151b23;
+  border-color: #3d444d;
 }
 
 #typora-quick-open-item,
 .typora-quick-open-item {
   color: var(--text-color);
-  background-color: #161b22;
-  border-color: #21262d #30363d #30363d #21262d;
+  background-color: #1e252e;
+  border-color: #29323d #3d444d #3d444d #29323d;
 }
 
 .typora-quick-open-item.active,
@@ -592,8 +609,8 @@ button:focus,
 .searchpanel-search-option-btn,
 .searchpanel-search-option-btn:hover {
   color: var(--text-color);
-  background-color: #21262d;
-  border-color: #30363d;
+  background-color: #29323d;
+  border-color: #3d444d;
 }
 
 /* Windows application chrome */
@@ -1029,12 +1046,12 @@ footer.ty-footer {
 /* Source-mode exit control: replace Typora's built-in light active surface. */
 .typora-sourceview-on #toggle-sourceview-btn {
   color: var(--text-strong-color) !important;
-  background-color: #21262d !important;
+  background-color: #29323d !important;
 }
 
 .typora-sourceview-on #toggle-sourceview-btn:hover {
   color: var(--text-bold-color) !important;
-  background-color: #30363d !important;
+  background-color: #3d444d !important;
 }
 
 /* Compact, flat toolbar groups inside the context menu. */
@@ -1104,8 +1121,8 @@ footer.ty-footer {
 .md-rawblock-control,
 .md-rawblock-panel {
   color: var(--text-color);
-  background-color: #161b22;
-  border-color: #30363d;
+  background-color: #1e252e;
+  border-color: #3d444d;
 }
 
 .mac-os #write {
@@ -1325,11 +1342,58 @@ content {
   right: auto !important;
 }
 
-/* 表格卡化：四角圆角 + 斑马纹 + 行 hover，保持 border-collapse: separate */
+/* TOC 空状态：文档没有标题时，Typora 会显示占位文本 "[TOC]"，观感很怪。
+   这里接管空内容状态的伪元素：隐藏占位，改为一行友好的灰色提示。 */
+#write .md-toc .md-toc-content:empty::before {
+  content: none !important;
+  display: none !important;
+}
+#write .md-toc .md-toc-content:empty::after {
+  content: "目录为空 —— 在正文中插入标题后，这里会自动生成目录";
+  display: block;
+  color: var(--text-muted-color);
+  font-size: 0.92em;
+  line-height: 1.8;
+  padding: 6px 2px 8px;
+}
+
+/* mermaid 图表卡片：比代码块更深一档，轮廓（边框）更清楚 */
+pre.md-fences.md-diagram.md-fences-advanced {
+  background-color: var(--mermaid-card-bg);
+  border-color: #3d444d;
+  box-shadow:
+    0 1px 3px rgba(1, 4, 9, 0.5),
+    inset 0 0 0 1px rgba(240, 246, 252, 0.02);
+}
+
+/* 公式块卡片化：与代码块/YAML/TOC 同一套卡片语言（圆角、描边、轻阴影） */
+#write .mathjax-block .md-rawblock-container,
+#write .mathjax-block .md-math-container {
+  box-sizing: border-box;
+  background-color: var(--surface-overlay);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 22px 16px;
+  margin: 18px 0;
+  box-shadow: 0 1px 3px rgba(1, 4, 9, 0.5);
+  overflow-x: auto;
+}
+/* 编辑公式（点击进入 LaTeX 源码编辑态）时保持同一卡片外观 */
+#write .mathjax-block .md-rawblock-container .md-rawblock-panel,
+#write .mathjax-block .md-rawblock-container .md-rawblock-edit-panel {
+  background-color: var(--rawblock-edit-panel-bd);
+  border: 0;
+  border-radius: 8px;
+}
+
+/* 表格卡化：四角圆角 + 斑马纹 + 行 hover，保持 border-collapse: separate。
+   网格线（横线+竖线）使用更亮的 --table-grid-color；
+   注意不要再用 `border: 0 !important` 清零——!important 会连同后面的
+   border-top/border-left 一起覆盖，导致竖线完全消失（旧版问题根源）。 */
 #write table {
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--table-grid-color);
   border-radius: 10px;
 }
 #write table tr {
@@ -1337,17 +1401,17 @@ content {
 }
 #write table th,
 #write table td {
-  border: 0 !important;
-  border-top: 1px solid var(--border-color);
-  border-left: 1px solid var(--border-color);
+  border: 0;
+  border-top: 1px solid var(--table-grid-color);
+  border-left: 1px solid var(--table-grid-color);
   padding: 8px 16px;
 }
 #write table thead th {
-  border-top: 0 !important;
+  border-top: 0;
 }
 #write table th:first-child,
 #write table td:first-child {
-  border-left: 0 !important;
+  border-left: 0;
 }
 #write table th:first-child {
   border-top-left-radius: 10px;
@@ -1431,7 +1495,7 @@ content {
 /* 行内代码：未选中与“被选中（光标进入，wrapper 加 .md-expand）”两种配色。
    未选中背景 rgb(22,27,34)、选中背景 rgb(47,61,100)；文字均为 rgb(184,192,204) */
 #write span.md-pair-s code {
-  background-color: rgb(22, 27, 34);
+  background-color: rgb(30, 37, 46);
   color: rgb(184, 192, 204);
 }
 #write span.md-pair-s.md-expand code {
@@ -1474,6 +1538,16 @@ content,
   #write pre.md-meta-block,
   blockquote {
     background-color: #f6f8fa !important;
+  }
+  /* 打印时公式块卡片与空目录提示的处理 */
+  #write .mathjax-block .md-rawblock-container,
+  #write .mathjax-block .md-math-container {
+    background-color: #f6f8fa !important;
+    border-color: #d0d7de !important;
+    box-shadow: none !important;
+  }
+  #write .md-toc .md-toc-content:empty::after {
+    content: none !important;
   }
   .md-fences::before,
   #write pre.md-meta-block::before,
