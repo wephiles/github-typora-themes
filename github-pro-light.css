@@ -54,9 +54,9 @@
   --gp-number: #6e7781;
 
   /* 圆角 / 阴影 */
-  --gp-radius-s: 6px;
-  --gp-radius-m: 10px;
-  --gp-radius-l: 12px;
+  --gp-radius-s: 4px;
+  --gp-radius-m: 6px;
+  --gp-radius-l: 8px;
   --gp-shadow:
     0 1px 3px rgba(27, 31, 36, 0.06), 0 0 0 1px rgba(27, 31, 36, 0.02);
 
